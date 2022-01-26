@@ -1,0 +1,49 @@
+.animation-loader {
+  position: absolute;
+  top:50vh;
+  left:50%;
+  height:100px;
+  width: 200px;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  
+
+  &__lottie {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 70px;
+    width: 280px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.loading .animation-loader {
+  animation: loader-fadein .3s ease-in-out .6s both;
+}
+
+.loaded .animation-loader {
+  animation: loader-fadeout .3s ease-in-out .9s both;
+}
+
+
+@keyframes loader-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes loader-fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,4 +1,17 @@
+@import "./utils/variables";
+@import "./utils/function";
+@import "./themes/colors";
 
-// SCSS
 @import "./base/base";
+@import "./layout/header";
+@import "./layout/main";
 
+@import "./pages/index";
+
+@import "./components/loader";
+@import "./components/logo";
+@import "./components/container";
+@import "./components/btn";
+@import "./components/avatar";
+@import "./components/popup";
+@import "./components/form";

@@ -20,6 +20,13 @@ const config = {
     path: path.resolve(__dirname, 'public'),
     filename: dev ? 'js/app.js' : 'js/app_[chunkhash:8].js'
   },
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
+
   module: {
     rules: [
       {
@@ -28,10 +35,10 @@ const config = {
         use: ['babel-loader']
       },
       {
-        test: /\.json$/,
         type: 'asset/resource',
+        test: /\.json$/,
         generator: {
-          filename: 'data/[name][ext]'
+          filename: 'assets/lottie/[name][ext]'
         }
       },
       {

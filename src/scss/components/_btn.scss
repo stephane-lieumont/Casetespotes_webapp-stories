@@ -1,0 +1,149 @@
+.btn {
+  position: relative;
+  display:block;
+  align-items: center;
+  background-color: $secondary;
+  min-height: 50px;
+  min-width: 200px;
+  border-radius: 7px;
+  margin:space(0.2);
+  padding:space(0.3) space(0.5);
+  text-decoration: none!important;
+  color:white!important;
+  overflow: hidden;
+  box-shadow: $shadow-medium;
+  white-space: nowrap;
+  border:none;
+  outline: 0;
+  cursor: pointer;
+  font-weight: $font-bold;
+  font-size: 1rem;
+  text-align: center;
+  width: 95%;
+
+  strong {
+    font-size: 2rem;
+    color:white!important;
+    letter-spacing: 1px;
+  }
+
+  &--primary {
+    background-color: $primary;
+  }
+
+  &--blue {
+    background-color: $blue;
+  }
+
+  &--yellow {
+    background-color: $yellow;
+    color: $secondary!important;
+  }
+
+  &__icon {
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding:space(0.2) space(0.7);
+
+    &::before {
+      content: '';
+      width: 30px!important;
+      align-self: flex-end;      
+      margin-left: space(1)!important;
+      margin-right: 0!important;
+    }
+
+    &--edit {
+      &::before {
+        background-image: url('../assets/icon-edit.svg');
+      }      
+    }
+
+    &--movie {
+      &::before {
+        background-image: url('../assets/icon-movie.svg');
+      }      
+    }
+
+    &--mic {
+      &::before {
+        background-image: url('../assets/icon-mic.svg');
+      }      
+    }
+
+    &--send {
+      &::before {
+        background-image: url('../assets/icon-send.svg');
+      }      
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+  }
+
+  &__label {
+    font-weight: $font-bold;
+    font-size: 1rem;
+  }
+
+  &__caption {
+    font-weight: $font-light!important;
+    font-size: 0.85rem;
+    margin-top:5px;
+  }
+
+  &::before {
+    display: block;
+    height: 50px;
+    width: 50px;
+    margin-right:space(0.5);
+    margin-left:space(0.3);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width:100%;
+    background-color: $light;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+  }
+
+  &:hover::after {
+    opacity: 0.5;
+  }
+
+  &--google {
+    max-width: 300px;
+    display:flex;
+    text-align: left;
+
+    &::before {      
+      content:"";
+      background-image: url('../assets/google_store-logo.svg');      
+    }
+  }
+
+  &--apple {
+    max-width: 300px;
+    display:flex;
+    text-align: left;
+
+    &::before { 
+      content:"";    
+      background-image: url('../assets/apple-logo.svg');
+    }
+  }
+}

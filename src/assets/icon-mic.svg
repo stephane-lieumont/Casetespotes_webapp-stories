@@ -1,0 +1,15 @@
+<svg id="Icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="mic_black_24dp">
+    <g id="Groupe_934" data-name="Groupe 934">
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="40" height="40" fill="none"/>
+      <rect id="Rectangle_5" data-name="Rectangle 5" width="40" height="40" fill="none"/>
+      <rect id="Rectangle_6" data-name="Rectangle 6" width="40" height="40" fill="none"/>
+    </g>
+    <g id="Groupe_936" data-name="Groupe 936" transform="translate(8.333 3.333)">
+      <g id="Groupe_935" data-name="Groupe 935">
+        <path id="Tracé_979" data-name="Tracé 979" d="M14,22a4.993,4.993,0,0,0,5-5V7A5,5,0,0,0,9,7V17A4.993,4.993,0,0,0,14,22Z" transform="translate(-2.333 -2)" fill="#4b4b4b"/>
+        <path id="Tracé_980" data-name="Tracé 980" d="M25,11A8.333,8.333,0,1,1,8.333,11H5A11.659,11.659,0,0,0,15,22.533v5.133h3.333V22.533A11.659,11.659,0,0,0,28.333,11Z" transform="translate(-5 4)" fill="#4b4b4b"/>
+      </g>
+    </g>
+  </g>
+</svg>
