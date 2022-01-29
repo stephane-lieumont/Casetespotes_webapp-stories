@@ -1,6 +1,5 @@
 const Error404 = {
   name: 'error-link',
-  params: {},
   render: async () => {
     const $node = document.createElement('main')
     $node.classList.add('container')
@@ -11,7 +10,7 @@ const Error404 = {
     `
 
     $node.innerHTML = content
-
+    $node.classList.add('show')
     return $node
   }
 }

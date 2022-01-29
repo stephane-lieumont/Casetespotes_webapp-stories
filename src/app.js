@@ -1,46 +1,40 @@
-import { initApp, router } from './scripts/routes/router'
-import ApiClass from './scripts/api/Api.class'
+import Header from './scripts/layout/header'
+import Footer from './scripts/layout/footer'
 
+import Loader from './scripts/components/loader'
+
+import { getDataByUrl } from './scripts/app.utils'
+import { router } from './scripts/routes/router'
+
+/**
+ * Initialize application
+ */
+const initApp = () => {
+  const body = document.querySelector('body')
+  const appContainer = document.querySelector('#app')
+
+  body.prepend(Header.render())
+  body.append(Footer.render())
+
+  appContainer.appendChild(Loader.render())
+
+  const timer = setTimeout(() => {
+    Loader.destroyLoader()
+    clearTimeout(timer)
+    app()
+  }, 2500)
+}
+
+/**
+ * Refresh App DOM
+ */
 const app = async () => {
-  // URL params
-  const url = new URL(window.location.href)
-  const params = url.searchParams.get('t')
-
-  // Api request User Profile
-  const Api = new ApiClass(require('./data/single.json'))
-  const data = await Api.getProfileByToken(params)
+  // Get Data Profile
+  const data = await getDataByUrl()
 
   // Route Paths
   router(data)
 }
 
-initApp()
 window.addEventListener('hashchange', app)
-window.addEventListener('load', app)
-
-/*
-import { appOnload } from './scripts/hooks/onload'
-import ApiClass from './scripts/api/Api.class'
-import Route from './scripts/routes/Routes'
-
-async function app () {
-  // URL params
-  const url = new URL(window.location.href)
-  const params = url.searchParams.get('t')
-
-  // Api request User Profile
-  const Api = new ApiClass(require('./scripts/mock/single.json'))
-  const data = await Api.getProfileByToken(params)
-
-  const route = new Route(data)
-
-  // Before load Components
-  appOnload(() => {
-    // After load Components
-    route.init()
-  })
-}
-
-app()
-
-*/
+window.addEventListener('load', initApp)

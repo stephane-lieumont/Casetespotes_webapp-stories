@@ -33,3 +33,8 @@ h1, h2, h3, strong {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+#app {
+  height: 200px;
+  transition: height .3s ease-in-out;
+}

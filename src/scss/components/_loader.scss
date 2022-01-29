@@ -6,7 +6,7 @@
   width: 200px;
   opacity: 0;
   transform: translate(-50%, -50%);
-  background-color: white;
+  animation: loader-fadein .3s ease-in-out .6s both;
   
 
   &__lottie {
@@ -18,15 +18,6 @@
     transform: translate(-50%, -50%);
   }
 }
-
-.loading .animation-loader {
-  animation: loader-fadein .3s ease-in-out .6s both;
-}
-
-.loaded .animation-loader {
-  animation: loader-fadeout .3s ease-in-out .9s both;
-}
-
 
 @keyframes loader-fadein {
   0% {

@@ -3,7 +3,7 @@
   width: 100%;
   opacity: 0;
   animation: logo-fadein .6s ease-in-out .3s both;
-  transition: all .3s ease-in-out;
+  transition: all .3s ease-out;
   cursor: pointer;
 
   &--low {
