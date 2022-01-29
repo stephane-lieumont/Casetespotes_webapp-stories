@@ -2,14 +2,7 @@ main {
   width: 100%;
   margin:space(1) 0;
   opacity: 0;
-  min-height: 120px;
-  max-height: 120px;
-  transition: max-height 3s ease-in-out;  
-}
-
-.loaded main {
-  animation: content-fadein .3s ease-in 1s both;  
-  max-height: 9999px;
+  animation: content-fadein .3s ease-in-out 1s both;
 }
 
 @keyframes content-fadein {

@@ -19,18 +19,8 @@
 </head>
 
 <body>
-  <header>
-    <img class="logo" data-target="home" width="254" height="125" src="<%= require('./assets/logo-case-tes-potes.svg') %>" alt="case tes potes">
-  </header>
-
-  <main>
-  </main>
-
-  <footer>
-  </footer>
-  <% for (var chunk in htmlWebpackPlugin.files.js) { %>
-    <script src="<%= htmlWebpackPlugin.files.js[chunk] %>"></script>
-  <% } %>
+  <div id="app"></div>
+  <script src="<%= htmlWebpackPlugin.files.js[chunk] %>"></script>
 </body>
 
 </html>

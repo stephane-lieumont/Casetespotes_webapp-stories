@@ -1,3 +1,5 @@
+import { conf } from '../app.conf'
+
 export default class Api {
   /**
    * @param {string} url
@@ -13,7 +15,7 @@ export default class Api {
   async getProfileByToken (token) {
     return fetch(this._url)
       .then(response => {
-        if (token === '1234') {
+        if (token === conf.apptokenTMP) {
           return response.json()
         } else {
           return false
