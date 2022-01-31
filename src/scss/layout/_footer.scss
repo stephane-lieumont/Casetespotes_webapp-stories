@@ -1,0 +1,26 @@
+.footer {
+  position: absolute;
+  margin: space(1);
+  bottom:0;
+  opacity: 0.3;
+  font-size: 0.7rem;
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap:space(0.2);
+  }
+
+  a {
+    color:$primary;
+    white-space: nowrap;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  span {
+    white-space: nowrap;
+    font-weight: $font-bold;
+  }
+}

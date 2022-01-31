@@ -16,7 +16,7 @@ export const routes = [
     }
   },
   {
-    path: '/error-link',
+    path: '/invitation-incorrecte',
     pathName: 'error',
     component: ErrorLink,
     params: {
@@ -61,13 +61,18 @@ export const router = async (data) => {
   const { component = Error404 } = data ? getComponentByPath(path, routes) || {} : { component: ErrorLink }
 
   // Get routes parameters
-  const params = getRouteParams(path, routes)
-  applyParams(params)
+  applyParams(component.params)
 
   // Render the component in the app placeholder
-  document.querySelector('#app').innerHTML = ''
-  document.querySelector('#app').append(await component.render(data))
-  document.querySelector('#app').style.height = document.querySelector('#app main').clientHeight + 'px'
+  const oldHeigthContainer = document.querySelector('#app main').clientHeight + 'px'
+  document.querySelector('#app').replaceChild(await component.render(data), document.querySelector('#app main'))
+
+  // Transition heigth main component
+  const newHeigthContainer = document.querySelector('#app main').clientHeight + 'px'
+  document.querySelector('#app main').style.height = oldHeigthContainer
+  setTimeout(() => {
+    document.querySelector('#app main').style.height = newHeigthContainer
+  }, 100)
 }
 
 /**
@@ -78,18 +83,6 @@ export const router = async (data) => {
 export const getRoute = (pathName) => {
   const matchRoute = routes.find(route => route.pathName === pathName)
   return matchRoute ? '#' + matchRoute.path : undefined
-}
-
-/**
- * Get Routes Params
- * @param {String} path
- * @param {Object} routes
- * @returns {Object}
- */
-const getRouteParams = (path, routes) => {
-  const defaultParams = routes[0].params
-  const result = routes.find(r => r.path.match(new RegExp(`^\\${path}$`, 'gm')))
-  return result ? result.params : defaultParams
 }
 
 /**
@@ -113,3 +106,14 @@ const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/'
 const applyParams = (params) => {
   if (params && params.headerLogoLow !== undefined) Header.logoLow(params.headerLogoLow)
 }
+
+const constructComponents = (routes) => {
+  routes.forEach(route => {
+    route.component.name = route.pathName
+    route.component.params = route.params
+    route.component.path = route.path
+  })
+}
+
+// add name and parameters to Object component
+constructComponents(routes)

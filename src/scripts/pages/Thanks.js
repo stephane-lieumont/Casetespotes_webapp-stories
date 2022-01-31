@@ -1,8 +1,7 @@
 import Button from '../components/button'
+import { getRoute } from '../routes/router'
 
 const Thanks = {
-  name: 'error-link',
-  params: {},
   render: async () => {
     const $node = document.createElement('main')
     $node.classList.add('container')
@@ -20,7 +19,17 @@ const Thanks = {
 
     $node.innerHTML = content
     $node.classList.add('show')
+    document.querySelector('.logo').onclick = null
+    Thanks.eventListeners()
     return $node
+  },
+
+  eventListeners: () => {
+    window.addEventListener('hashchange', Thanks.redirectToRoute)
+  },
+
+  redirectToRoute: (e) => {
+    location.href = getRoute('error')
   }
 }
 

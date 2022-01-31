@@ -6,19 +6,12 @@
 }
 
 body {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  margin: 0;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 1rem;
   color: #4B4B4B;
   min-height: 100vh;
-  width: 100%;
+  margin: 0;
 }
 
 h1, h2, h3, strong {
@@ -40,8 +33,15 @@ h1, h2, h3, strong {
 }
 
 #app {
-  height: 200px;
-  transition: height 0.3s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
 }
 
 header {
@@ -56,9 +56,11 @@ main {
   width: 100%;
   margin: 30px 0;
   opacity: 0;
+  min-height: 150px;
+  transition: height 0.3s ease-in-out !important;
 }
 main.show {
-  animation: fadein-content 0.5s ease-in both;
+  animation: fadein-content 0.5s ease-in 0.3s both;
 }
 
 @keyframes fadein-content {
@@ -69,6 +71,30 @@ main.show {
     opacity: 1;
   }
 }
+.footer {
+  position: absolute;
+  margin: 30px;
+  bottom: 0;
+  opacity: 0.3;
+  font-size: 0.7rem;
+}
+.footer__content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.footer a {
+  color: #CE0058;
+  white-space: nowrap;
+}
+.footer a:hover {
+  text-decoration: none;
+}
+.footer span {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
 .animation-loader {
   position: absolute;
   top: 50vh;
@@ -106,15 +132,19 @@ main.show {
 }
 .logo {
   position: absolute;
-  width: 100%;
+  left: 50%;
+  bottom: 0;
+  width: 254px;
   opacity: 0;
   animation: logo-fadein 0.6s ease-in-out 0.3s both;
-  transition: all 0.3s ease-out;
+  transition: all 0.3s ease-in-out 0.15s;
+  transform: translateX(-50%) scale(1);
   cursor: pointer;
 }
 .logo--low {
   width: 200px;
-  transform: scale(0.7);
+  left: 0;
+  transform: translateX(0) scale(0.65);
 }
 
 @keyframes logo-fadein {
@@ -211,6 +241,15 @@ main.show {
   background-color: #FBBB35;
   color: #4B4B4B !important;
 }
+.btn--load {
+  pointer-events: none;
+}
+.btn--load::after {
+  opacity: 0.5 !important;
+}
+.btn--load::before {
+  background-image: url(../assets/spinner.svg) !important;
+}
 .btn__icon {
   display: flex;
   flex-direction: row-reverse;
@@ -295,6 +334,14 @@ main.show {
   background-image: url(../assets/apple-logo.svg);
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .avatar {
   height: 136px;
   width: 136px;
@@ -320,6 +367,12 @@ main.show {
   background: rgba(0, 0, 0, 0.7);
   z-index: 2;
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out 5s;
+  animation: fadein-overlay 0.3s ease-in-out both;
+}
+.overlay.hide {
+  animation: fadeout-overlay 0.3s ease-in-out 0.3s both;
 }
 
 .popup {
@@ -328,11 +381,26 @@ main.show {
   max-width: 500px;
   box-shadow: #EDEDED;
   overflow: hidden;
+  transform: translateY(100px);
+  opacity: 0;
+  animation: fadein-popup 0.3s ease-in-out 0.15s both;
+}
+.popup.hide {
+  opacity: 1;
+  animation: fadeout-popup 0.3s ease-in-out both;
 }
 .popup__header h2, .popup__header h3, .popup__header h4 {
   margin: 0;
   font-size: 1.2rem;
   padding: 30px;
+  padding-top: 15px;
+}
+.popup__header__animation {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 30px;
+  background-image: url(../assets/check.png);
 }
 .popup__content {
   display: flex;
@@ -354,6 +422,42 @@ main.show {
   align-items: center;
 }
 
+@keyframes fadein-overlay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeout-overlay {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadein-popup {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@keyframes fadeout-popup {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+}
 .form-control {
   text-align: left;
   position: relative;

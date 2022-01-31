@@ -6,17 +6,19 @@ import Loader from './scripts/components/loader'
 import { getDataByUrl } from './scripts/app.utils'
 import { router } from './scripts/routes/router'
 
+let data
+
 /**
  * Initialize application
  */
-const initApp = () => {
-  const body = document.querySelector('body')
-  const appContainer = document.querySelector('#app')
+const initApp = async () => {
+  const $app = document.querySelector('#app')
 
-  body.prepend(Header.render())
-  body.append(Footer.render())
-
-  appContainer.appendChild(Loader.render())
+  $app.prepend(Header.render())
+  $app.appendChild(document.createElement('main'))
+  $app.appendChild(Loader.render())
+  $app.appendChild(Footer.render())
+  data = await getDataByUrl()
 
   const timer = setTimeout(() => {
     Loader.destroyLoader()
@@ -28,10 +30,7 @@ const initApp = () => {
 /**
  * Refresh App DOM
  */
-const app = async () => {
-  // Get Data Profile
-  const data = await getDataByUrl()
-
+const app = () => {
   // Route Paths
   router(data)
 }

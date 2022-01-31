@@ -1,7 +1,6 @@
 import Button from '../components/button'
 
 const ErrorLink = {
-  name: 'error-link',
   render: async () => {
     const $node = document.createElement('main')
     $node.classList.add('container')

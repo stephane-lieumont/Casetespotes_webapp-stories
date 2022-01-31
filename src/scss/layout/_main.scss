@@ -2,9 +2,11 @@ main {
   width: 100%;
   margin:space(1) 0;
   opacity: 0;
+  min-height: 150px;
+  transition: height .3s ease-in-out!important;
 
   &.show {
-    animation: fadein-content .5s ease-in both;
+    animation: fadein-content .5s ease-in .3s both;    
   }
 }
 

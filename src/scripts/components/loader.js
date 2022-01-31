@@ -16,7 +16,7 @@ const Loader = {
   },
   destroyLoader () {
     Loader.lottieObject.destroy()
-    Loader.wrapper.remove()
+    document.querySelector('.animation-loader').remove()
   },
   render: () => {
     const $node = document.createElement('div')

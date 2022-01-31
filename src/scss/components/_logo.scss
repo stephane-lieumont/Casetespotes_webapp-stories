@@ -1,14 +1,18 @@
 .logo {
   position:absolute;
-  width: 100%;
+  left: 50%;
+  bottom: 0;
+  width:254px;
   opacity: 0;
   animation: logo-fadein .6s ease-in-out .3s both;
-  transition: all .3s ease-out;
+  transition: all .3s ease-in-out .15s;
+  transform: translateX(-50%) scale(1);
   cursor: pointer;
 
   &--low {
     width: 200px;
-    transform: scale(0.7);
+    left: 0;
+    transform: translateX(0) scale(0.65);
   }
 }
 

@@ -1,5 +1,4 @@
 const Error404 = {
-  name: 'error-link',
   render: async () => {
     const $node = document.createElement('main')
     $node.classList.add('container')

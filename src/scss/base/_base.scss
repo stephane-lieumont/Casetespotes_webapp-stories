@@ -3,19 +3,12 @@
 }
 
 body {
-  position:relative;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: space(1);
-  margin:0;
   font-family: 'Roboto', sans-serif;
   font-weight: $font-regular;
   font-size:1rem;
   color: $secondary;
   min-height: 100vh;
-  width: 100%;
+  margin: 0;
 }
 
 h1, h2, h3, strong {
@@ -35,6 +28,13 @@ h1, h2, h3, strong {
 }
 
 #app {
-  height: 200px;
-  transition: height .3s ease-in-out;
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: space(1);
+  margin:0;
+  width: 100%;
+  min-height: 100vh;
 }

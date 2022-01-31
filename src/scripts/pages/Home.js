@@ -1,7 +1,6 @@
 import Button from '../components/button'
 
 const Home = {
-  name: 'home',
   render: (data) => {
     const $node = document.createElement('main')
     $node.classList.add('container')
