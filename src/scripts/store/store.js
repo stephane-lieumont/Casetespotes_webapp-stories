@@ -1,8 +1,7 @@
+/**
+ * Store Datas during running application
+ */
 const Store = {
-  history: {
-    previousPath: '',
-    currentPath: ''
-  },
   formEditStory: {
     inputName: '',
     inputStory: ''

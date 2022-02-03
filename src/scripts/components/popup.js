@@ -8,6 +8,10 @@ const Popup = {
   animation: null,
   lottieObject: null,
   buttons: [],
+  /**
+   * Render component
+   * @returns {HTMLElement}
+   */
   render: () => {
     const $node = document.createElement('div')
     $node.classList.add('overlay')
@@ -42,6 +46,10 @@ const Popup = {
     return $node
   },
 
+  /**
+   * Render Buttons
+   * @returns {String}
+   */
   buttonsRender: () => {
     if (Popup.buttons.length > 0) {
       let wrapper = '<div class="popup__action">'
@@ -56,6 +64,11 @@ const Popup = {
     }
   },
 
+  /**
+   * Create Check animation
+   * @param {HTMLElement} HTMLElement
+   * @returns {lottieObject}
+   */
   createAnimation: (HTMLElement) => {
     return lottie.loadAnimation({
       name: 'PopupAnimation',
@@ -67,6 +80,9 @@ const Popup = {
     })
   },
 
+  /**
+   * Delete Popup
+   */
   destroyPopup: () => {
     Popup.wrapper.querySelector('.popup').classList.add('hide')
     Popup.wrapper.classList.add('hide')

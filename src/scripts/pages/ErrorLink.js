@@ -1,6 +1,10 @@
 import Button from '../components/button'
 
 const ErrorLink = {
+  /**
+   * Render Component
+   * @returns {HTMLElement}
+   */
   render: async () => {
     const $node = document.createElement('main')
     $node.classList.add('container')

@@ -2,6 +2,11 @@ import Avatar from '../components/avatar'
 import Button from '../components/button'
 
 const Home = {
+  /**
+   * Render Component
+   * @param {Object} data
+   * @returns {HTMLElement}
+   */
   render: (data) => {
     const $node = document.createElement('main')
     $node.classList.add('container', 'load')

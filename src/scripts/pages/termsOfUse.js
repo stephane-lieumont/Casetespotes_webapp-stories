@@ -1,5 +1,9 @@
 
 const TermsOfUse = {
+  /**
+   * Render component
+   * @returns {HTMLElement}
+   */
   render: () => {
     const $node = document.createElement('main')
     $node.classList.add('container--medium')

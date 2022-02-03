@@ -1,5 +1,8 @@
 import ApiClass from './api/Api.class'
 
+/**
+ * @returns {Response}
+ */
 export const getDataByUrl = () => {
   // URL params
   const url = new URL(window.location.href)
@@ -10,6 +13,10 @@ export const getDataByUrl = () => {
   return Api.getProfileByToken(params)
 }
 
+/**
+ * @param {Object} data
+ * @returns {Response}
+ */
 export const sendDataStory = (data) => {
   const Api = new ApiClass()
   return Api.sendFormStory(data)

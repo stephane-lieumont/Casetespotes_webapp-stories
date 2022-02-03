@@ -26,6 +26,10 @@ export default class Api {
       })
   }
 
+  /**
+   * @param {Object} data
+   * @returns {Response}
+   */
   async sendFormStory (data) {
     console.log(data)
     // Simulate Call API Post

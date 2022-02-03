@@ -1,4 +1,5 @@
 import Header from '../layout/header'
+import Alert from '../components/alert'
 
 import EditTestimony from '../pages/editTestimony'
 import Error404 from '../pages/error404'
@@ -7,8 +8,9 @@ import Home from '../pages/home'
 import Thanks from '../pages/thanks'
 import TermsOfUse from '../pages/termsOfUse'
 
-import Alert from '../components/alert'
-
+/**
+ * Define routes with params
+ */
 export const routes = [
   {
     path: '/',
@@ -103,7 +105,7 @@ export const getRoute = (pathName) => {
 /**
  * Get Component by Path
  * @param {String} path
- * @param {Object} routes
+ * @param {Object[]} routes
  * @returns {Object}
  */
 export const getComponentByPath = (path, routes) => routes.find(r => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined
@@ -123,6 +125,13 @@ const applyParams = (params) => {
   params && params.headerReturnBtn ? Header.addBtnReturn() : Header.destroyBtnReturn()
 }
 
+/**
+ * selectComponent by path and data
+ * @param {String} path
+ * @param {String} routes
+ * @param {Object} data
+ * @returns {Object} return component
+ */
 const selectComponent = (path, routes, data) => {
   const componentObject = getComponentByPath(path, routes)
   let component
@@ -141,6 +150,11 @@ const selectComponent = (path, routes, data) => {
   return component
 }
 
+/**
+ * Render component on main section DOM
+ * @param {Object} component
+ * @param {Object} data
+ */
 const renderComponent = async (component, data) => {
   const oldHeigthContainer = document.querySelector('#app main').clientHeight
   document.querySelector('#app').replaceChild(await component.render(data), document.querySelector('#app main'))
@@ -157,6 +171,10 @@ const renderComponent = async (component, data) => {
   }, 100)
 }
 
+/**
+ * Add components params defines on routes ArrayObject
+ * @param {Object[]} routes
+ */
 const constructComponents = (routes) => {
   routes.forEach(route => {
     route.component.name = route.pathName

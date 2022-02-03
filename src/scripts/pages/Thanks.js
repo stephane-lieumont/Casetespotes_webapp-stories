@@ -2,6 +2,10 @@ import Button from '../components/button'
 import { router, routes, parseLocation, getRoute, getComponentByPath } from '../routes/router'
 
 const Thanks = {
+  /**
+   * Render Component
+   * @returns {HTMLElement}
+   */
   render: async () => {
     const $node = document.createElement('main')
     $node.classList.add('container')
@@ -22,10 +26,17 @@ const Thanks = {
     return $node
   },
 
+  /**
+   * EventListeners on component
+   */
   eventListeners: () => {
     window.addEventListener('hashchange', Thanks.redirectToRoute)
   },
 
+  /**
+   * Change redirection actions
+   * @param {HashChangeEvent} e
+   */
   redirectToRoute: (e) => {
     const path = parseLocation()
     const component = getComponentByPath(path, routes)

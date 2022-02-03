@@ -1,5 +1,11 @@
 const Avatar = {
   wrapper: null,
+  /**
+   * Render component
+   * @param {Object} data
+   * @param {HTMLElement} container
+   * @returns {HTMLElement}
+   */
   render: (data, container) => {
     if (Avatar.wrapper) {
       container.classList.remove('load')
@@ -10,6 +16,12 @@ const Avatar = {
       })
     }
   },
+  /**
+   * Create Component Avatar Once Time
+   * @param {Object} data
+   * @param {Function} callback
+   * @returns {HTMLElement}
+   */
   createAvatarSingle: (data, callback) => {
     if (data) {
       const $node = document.createElement('div')

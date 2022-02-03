@@ -3,6 +3,13 @@ import { getRoute } from '../routes/router'
 
 const Button = {
   default: {
+    /**
+     * Render Component
+     * @param {String} label
+     * @param {String} pathName
+     * @param {String} action
+     * @returns {String}
+     */
     render: (label, pathName, action = 'default') => {
       return `
         <button class="btn btn--primary" data-action="${action}" ${Button.getPathLink(pathName)}>
@@ -12,6 +19,13 @@ const Button = {
     }
   },
   blue: {
+    /**
+     * Render Component
+     * @param {String} label
+     * @param {String} pathName
+     * @param {String} action
+     * @returns {String}
+     */
     render: (label, pathName, action = 'default') => {
       return `
         <button class="btn btn--blue" data-action="${action}" ${Button.getPathLink(pathName)}>
@@ -21,6 +35,13 @@ const Button = {
     }
   },
   edit: {
+    /**
+     * Render Component
+     * @param {String} label
+     * @param {String} pathName
+     * @param {String} action
+     * @returns {String}
+     */
     render: (label, pathName, action = 'default') => {
       return `
         <button class="btn btn--primary btn__icon btn__icon--edit" data-action="${action}"  ${Button.getPathLink(pathName)} >
@@ -33,6 +54,13 @@ const Button = {
     }
   },
   movie: {
+    /**
+     * Render Component
+     * @param {String} label
+     * @param {String} pathName
+     * @param {String} action
+     * @returns {String}
+     */
     render: (label, pathName, action = 'default') => {
       return `
         <button class="btn btn--blue btn__icon btn__icon--movie" data-action="${action}" ${Button.getPathLink(pathName)} >
@@ -45,6 +73,13 @@ const Button = {
     }
   },
   mic: {
+    /**
+     * Render Component
+     * @param {String} label
+     * @param {String} pathName
+     * @param {String} action
+     * @returns {String}
+     */
     render: (label, pathName, action = 'default') => {
       return `
         <button class="btn btn--yellow btn__icon btn__icon--mic" data-action="${action}" ${Button.getPathLink(pathName)} >
@@ -57,6 +92,13 @@ const Button = {
     }
   },
   send: {
+    /**
+     * Render Component
+     * @param {String} label
+     * @param {String} pathName
+     * @param {String} action
+     * @returns {String}
+     */
     render: (label, pathName, action = 'default') => {
       return `
         <button class="btn btn--primary btn__icon btn__icon--send" data-action="${action}" ${Button.getPathLink(pathName)} >
@@ -69,6 +111,10 @@ const Button = {
     }
   },
   playstore: {
+    /**
+     * Render Component
+     * @returns {String}
+     */
     render: () => {
       return `
         <a href="${conf.links.playstore}" class="btn btn--google" >
@@ -78,6 +124,10 @@ const Button = {
     }
   },
   appstore: {
+    /**
+     * Render Component
+     * @returns {String}
+     */
     render: () => {
       return `
         <a href="${conf.links.appstore}" class="btn btn--apple" >
@@ -87,6 +137,11 @@ const Button = {
     }
   },
 
+  /**
+   * Add click action on button
+   * @param {String} pathName
+   * @returns {String}
+   */
   getPathLink: (pathName) => {
     return getRoute(pathName) ? `onclick="location.href='${getRoute(pathName)}'"` : ''
   }

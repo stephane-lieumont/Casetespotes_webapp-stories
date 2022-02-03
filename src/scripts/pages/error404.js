@@ -1,4 +1,8 @@
 const Error404 = {
+  /**
+   * Render component
+   * @returns {HTMLElement}
+   */
   render: async () => {
     const $node = document.createElement('main')
     $node.classList.add('container')

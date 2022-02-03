@@ -9,6 +9,10 @@ import { sendDataStory } from '../app.utils'
 const EditTestimony = {
   inputMaxLength: 280,
   data: null,
+  /**
+   * @param {Object} data
+   * @returns {HTMLElement}
+   */
   render: (data) => {
     Object.defineProperty(Popup, 'data', {
       value: data,
@@ -46,6 +50,9 @@ const EditTestimony = {
     return $node
   },
 
+  /**
+   * @param {HTMLElement} HTMLElement
+   */
   eventListener: (HTMLElement) => {
     HTMLElement.querySelector('input').addEventListener('input', e => {
       e.target.setAttribute('value', e.target.value)
@@ -77,6 +84,10 @@ const EditTestimony = {
     })
   },
 
+  /**
+   * Stop editing textarea
+   * @param {KeyboardEvent} e
+   */
   stopEditable: (e) => {
     if (e.key !== 'Enter' && e.key !== 'Backspace') {
       e.preventDefault()
@@ -84,6 +95,10 @@ const EditTestimony = {
     }
   },
 
+  /**
+   * Dispay error alert
+   * @param {Object[{string, HTMLElement}]} errorList
+   */
   displayAlert: (errorList) => {
     const errors = []
 
@@ -98,19 +113,27 @@ const EditTestimony = {
     document.querySelector('header').appendChild(Alert.render())
   },
 
+  /**
+   * Destrop Alert
+   */
   hideAlert: () => {
     Alert.destroyAlert()
     document.querySelectorAll('.form-control__input').forEach(item => item.classList.remove('error'))
   },
 
-  validateForm: (data) => {
+  /**
+   * Validate form inputs
+   * @param {Object} dataSubmit
+   * @returns {Boolean}
+   */
+  validateForm: (dataSubmit) => {
     const inputName = document.querySelector('input[name="name"]').parentNode
     const inputStory = document.querySelector('textarea[name="story"]').parentNode
     const errorList = []
 
     // Check inputs value length
-    if (data.name.length < 3) errorList.push({ error: 'Veuillez saisir le champs prénom', input: inputName })
-    if (data.story.length < 3) errorList.push({ error: 'Veuillez rédiger votre témoignage', input: inputStory })
+    if (dataSubmit.name.length < 3) errorList.push({ error: 'Veuillez saisir le champs prénom', input: inputName })
+    if (dataSubmit.story.length < 3) errorList.push({ error: 'Veuillez rédiger votre témoignage', input: inputStory })
 
     if (errorList.length === 0) {
       EditTestimony.hideAlert()
@@ -121,16 +144,20 @@ const EditTestimony = {
     }
   },
 
+  /**
+   * Send form on Database
+   * @param {ClickEvent} e
+   */
   sendForm: async (e) => {
     e.preventDefault()
     e.target.classList.add('btn--load')
 
     const form = document.querySelector('form')
     const formData = new FormData(form)
-    const data = Object.fromEntries(formData.entries())
+    const dataSubmit = Object.fromEntries(formData.entries())
 
-    if (EditTestimony.validateForm(data)) {
-      sendDataStory(data)
+    if (EditTestimony.validateForm(dataSubmit)) {
+      sendDataStory(dataSubmit)
         .then((response) => {
           if (response.status === 200) {
             EditTestimony.renderPopup()

@@ -2,7 +2,10 @@ import { conf } from '../app.conf'
 import { getRoute } from '../routes/router'
 
 const Footer = {
-  name: 'footer',
+  /**
+   * Render component
+   * @returns {HTMLElement}
+   */
   render: () => {
     const $node = document.createElement('footer')
     $node.classList.add('footer')

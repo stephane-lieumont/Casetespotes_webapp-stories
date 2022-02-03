@@ -4,6 +4,11 @@ import loaderAnimation from '@/assets/lottie/lottieLoader.json'
 const Loader = {
   wrapper: null,
   lottieObject: null,
+  /**
+   * Create new Loader
+   * @param {HTMLElement} HTMLElement
+   * @returns {lottieObject}
+   */
   createLoader: (HTMLElement) => {
     return lottie.loadAnimation({
       name: 'loader',
@@ -14,10 +19,17 @@ const Loader = {
       path: loaderAnimation
     })
   },
+  /**
+   * Delete Loader
+   */
   destroyLoader () {
     Loader.lottieObject.destroy()
     document.querySelector('.animation-loader').remove()
   },
+  /**
+   * Render component
+   * @returns {HTMLElement}
+   */
   render: () => {
     const $node = document.createElement('div')
     $node.classList.add('animation-loader')
