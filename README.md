@@ -26,10 +26,10 @@ npm run prod
 ```
 
 ## Route local
-``localhost/?t=1234``
-``localhost/?t=1234#/edition-temoignage``
-``localhost/?t=1234#/temoignage-enregistre``
-``localhost/?t=1234#/invitation-incorrecte``
+``localhost/?t=1234``  
+``localhost/?t=1234#/edition-temoignage``  
+``localhost/?t=1234#/temoignage-enregistre``  
+``localhost/?t=1234#/invitation-incorrecte``  
 
 ## Configuration
 The `src/scripts/app.conf.js` file is used to change certain elements of the application
