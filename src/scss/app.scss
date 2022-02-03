@@ -5,8 +5,10 @@
 @import "./base/base";
 @import "./layout/header";
 @import "./layout/main";
+@import "./layout/footer";
 
 @import "./pages/index";
+@import "./pages/termsOfUses";
 
 @import "./components/loader";
 @import "./components/logo";
@@ -15,3 +17,5 @@
 @import "./components/avatar";
 @import "./components/popup";
 @import "./components/form";
+@import "./components/alert";
+@import "./components/fabBtn";

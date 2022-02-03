@@ -1,36 +1,47 @@
-import Button from '../components/Button'
+import Button from '../components/button'
+import { router, routes, parseLocation, getRoute, getComponentByPath } from '../routes/router'
 
-export default class Thanks {
-  constructor () {
-    this.routeName = 'thanks'
-    this.controls = [
-      new Button(null, 'apple', 'container__action__item', '#'),
-      new Button(null, 'google', 'container__action__item', '#')
-    ]
-  }
+const Thanks = {
+  /**
+   * Render Component
+   * @returns {HTMLElement}
+   */
+  render: async () => {
+    const $node = document.createElement('main')
+    $node.classList.add('container')
 
-  content () {
-    const $node = document.createElement('div')
-    $node.classList.add('container__content')
-
-    const content = `
-      <h2>Merci pour votre réponse !</h2>
-      <p class="container--medium">Connaitrais tu un(e) pote célib qui aurait besoin de coup de main pour trouver l’âme sœur ?</p>
+    const content = `      
+      <div class="container__content">
+        <h2>Merci pour votre réponse !</h2>
+        <p class="container--medium">Connaitrais tu un(e) pote célib qui aurait besoin de coup de main pour trouver l’âme sœur ?</p>
+      </div>
+      <div class="container__action">
+        ${Button.playstore.render()}
+        ${Button.appstore.render()}
+      </div>
     `
 
     $node.innerHTML = content
-
+    Thanks.eventListeners()
     return $node
-  }
+  },
 
-  actions () {
-    const $node = document.createElement('div')
-    $node.classList.add('container__action', 'container__action--column')
+  /**
+   * EventListeners on component
+   */
+  eventListeners: () => {
+    window.addEventListener('hashchange', Thanks.redirectToRoute)
+  },
 
-    this.controls.forEach(button => {
-      $node.appendChild(button.component)
-    })
-
-    return $node
+  /**
+   * Change redirection actions
+   * @param {HashChangeEvent} e
+   */
+  redirectToRoute: (e) => {
+    const path = parseLocation()
+    const component = getComponentByPath(path, routes)
+    component.params.restrictedAccess ? location.href = getRoute('error') : router()
   }
 }
+
+export default Thanks

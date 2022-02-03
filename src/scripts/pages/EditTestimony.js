@@ -1,72 +1,179 @@
-import Button from '../components/Button'
+import Store from '../store/store'
+import Button from '../components/button'
+import Popup from '../components/popup'
+import Alert from '../components/alert'
+import Avatar from '../components/avatar'
+import popupAnimation from '@/assets/lottie/validateCheck.json'
+import { sendDataStory } from '../app.utils'
 
-export default class EditTestimony {
-  constructor () {
-    this.routeName = 'edit'
-    this.controls = [
-      new Button('Envoyer le témoignage', 'send', 'container__action__item', null)
-    ]
+const EditTestimony = {
+  inputMaxLength: 280,
+  data: null,
+  /**
+   * @param {Object} data
+   * @returns {HTMLElement}
+   */
+  render: (data) => {
+    Object.defineProperty(Popup, 'data', {
+      value: data,
+      writable: false
+    })
 
-    this.formData = ''
-  }
-
-  content (firstname) {
-    const $node = document.createElement('div')
-    $node.classList.add('container__content')
+    const $node = document.createElement('main')
+    $node.classList.add('container', 'load')
 
     const content = `
-      <h2>Décrivez votre amie ${firstname}</h2>
-      <p class="container--small">Quelles sont ses préférences, ses qualités, une petite anecdote…<br /> La description sera ensuite envoyée à Julie qui décidera de l’afficher sur son profil.</p>
-    `
-
-    $node.innerHTML = content
-
-    return $node
-  }
-
-  form (inputMaxLength) {
-    const $node = document.createElement('form')
-    $node.id = 'form-edit-testimony'
-    $node.classList.add('form-control')
-
-    let content = `
-      <div class="form-control__input">        
-        <input type="text"  name="name" value="" />
-        <label>Prénom ou surnom</label>
+      <div class="container__content">
+        <h2>Décrivez votre amie ${data.firstname}</h2>
+        <p class="container--small">Quelles sont ses préférences, ses qualités, une petite anecdote… La description sera ensuite envoyée à Julie qui décidera de l’afficher sur son profil.</p>
+        <form class="form-control">
+          <div class="form-control__input">
+            <input type="text"  name="name" value="${Store.formEditStory.inputName}" />
+            <label>Prénom ou surnom</label>
+          </div>
+          <div class="form-control__input">
+            <textarea name="story" data-value="${Store.formEditStory.inputStory}">${Store.formEditStory.inputStory}</textarea>
+            <label>Votre témoignage</label>
+            <div class="form-control__char"><span>Reste ${EditTestimony.inputMaxLength}</span> caractères</div>
+          </div>
+          <div class="container__action">
+            ${Button.send.render('Envoyer le témoignage')}
+          </div>
+        </form>
       </div>
-      <div class="form-control__input">
-        <textarea name="testimony" data-value=""></textarea>
-        <label>Témoignage</label>
     `
 
-    if (inputMaxLength) {
-      content += `<div class="form-control__char"><span>Reste ${inputMaxLength}</span> caractères</div>`
-    }
-
-    content += '</div>'
-
     $node.innerHTML = content
+    $node.prepend(Avatar.render(data, $node))
+    EditTestimony.eventListener($node)
 
-    $node.querySelector('input').addEventListener('input', e => e.target.setAttribute('value', e.target.value))
-    $node.querySelector('textarea').addEventListener('input', e => {
+    return $node
+  },
+
+  /**
+   * @param {HTMLElement} HTMLElement
+   */
+  eventListener: (HTMLElement) => {
+    HTMLElement.querySelector('input').addEventListener('input', e => {
+      e.target.setAttribute('value', e.target.value)
+      Store.formEditStory.inputName = e.target.value
+      EditTestimony.hideAlert()
+    })
+    HTMLElement.querySelector('textarea').addEventListener('input', e => {
       e.target.dataset.value = e.target.value
-      if (inputMaxLength) $node.querySelector('.form-control__char span').innerHTML = inputMaxLength - e.target.value.length
+      Store.formEditStory.inputStory = e.target.value
+      if (EditTestimony.inputMaxLength)HTMLElement.querySelector('.form-control__char span').innerHTML = EditTestimony.inputMaxLength - e.target.value.length
+      e.target.value.length >= EditTestimony.inputMaxLength ? e.target.addEventListener('keydown', EditTestimony.stopEditable) : e.target.removeEventListener('keydown', EditTestimony.stopEditable)
+      EditTestimony.hideAlert()
+    })
+    HTMLElement.querySelector('form button').addEventListener('click', EditTestimony.sendForm)
+  },
+
+  renderPopup: () => {
+    Popup.title = `Ton témoignage  a été envoyé à ${Popup.data.firstname}!`
+    Popup.content = 'Connaitrais tu un(e) pote célib qui aurait besoin de coup de main pour trouver l’âme sœur ?'
+    Popup.buttons = [Button.blue.render('En savoir plus', 'thanks', 'close')]
+    Popup.animation = popupAnimation
+    document.querySelector('body').appendChild(Popup.render())
+    EditTestimony.eventListenerPopup()
+  },
+
+  eventListenerPopup: () => {
+    Popup.wrapper.querySelector('button[data-action="close"]').addEventListener('click', () => {
+      Popup.destroyPopup()
+    })
+  },
+
+  /**
+   * Stop editing textarea
+   * @param {KeyboardEvent} e
+   */
+  stopEditable: (e) => {
+    if (e.key !== 'Enter' && e.key !== 'Backspace') {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  },
+
+  /**
+   * Dispay error alert
+   * @param {Object[{string, HTMLElement}]} errorList
+   */
+  displayAlert: (errorList) => {
+    const errors = []
+
+    errorList.forEach(item => {
+      if (item.input) item.input.classList.add('error')
+      errors.push(item.error)
     })
 
-    $node.appendChild(this.actions())
+    if (Alert.wrapper) Alert.wrapper.remove()
 
-    return $node
-  }
+    Alert.content = errors.join('<br />')
+    document.querySelector('header').appendChild(Alert.render())
+  },
 
-  actions () {
-    const $node = document.createElement('div')
-    $node.classList.add('container__action', 'container__action--column')
+  /**
+   * Destrop Alert
+   */
+  hideAlert: () => {
+    Alert.destroyAlert()
+    document.querySelectorAll('.form-control__input').forEach(item => item.classList.remove('error'))
+  },
 
-    this.controls.forEach(button => {
-      button.component.dataset.form = 'form-edit-testimony'
-      $node.appendChild(button.component)
-    })
+  /**
+   * Validate form inputs
+   * @param {Object} dataSubmit
+   * @returns {Boolean}
+   */
+  validateForm: (dataSubmit) => {
+    const inputName = document.querySelector('input[name="name"]').parentNode
+    const inputStory = document.querySelector('textarea[name="story"]').parentNode
+    const errorList = []
 
-    return $node
+    // Check inputs value length
+    if (dataSubmit.name.length < 3) errorList.push({ error: 'Veuillez saisir le champs prénom', input: inputName })
+    if (dataSubmit.story.length < 3) errorList.push({ error: 'Veuillez rédiger votre témoignage', input: inputStory })
+
+    if (errorList.length === 0) {
+      EditTestimony.hideAlert()
+      return true
+    } else {
+      EditTestimony.displayAlert(errorList)
+      return false
+    }
+  },
+
+  /**
+   * Send form on Database
+   * @param {ClickEvent} e
+   */
+  sendForm: async (e) => {
+    e.preventDefault()
+    e.target.classList.add('btn--load')
+
+    const form = document.querySelector('form')
+    const formData = new FormData(form)
+    const dataSubmit = Object.fromEntries(formData.entries())
+
+    if (EditTestimony.validateForm(dataSubmit)) {
+      sendDataStory(dataSubmit)
+        .then((response) => {
+          if (response.status === 200) {
+            EditTestimony.renderPopup()
+            e.target.classList.remove('btn--load')
+          } else {
+            throw new Error()
+          }
+        })
+        .catch(() => {
+          EditTestimony.displayAlert([{ error: 'Un erreur c\'est produite lors de l\'enregistrement des données' }])
+          e.target.classList.remove('btn--load')
+        })
+    } else {
+      e.target.classList.remove('btn--load')
+    }
   }
 }
+
+export default EditTestimony

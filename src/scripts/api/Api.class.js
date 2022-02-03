@@ -1,8 +1,10 @@
+import { conf } from '../app.conf'
+
 export default class Api {
   /**
    * @param {string} url
    */
-  constructor (url) {
+  constructor (url = null) {
     this._url = url
   }
 
@@ -13,7 +15,7 @@ export default class Api {
   async getProfileByToken (token) {
     return fetch(this._url)
       .then(response => {
-        if (token === '1234') {
+        if (token === conf.apptokenTMP) {
           return response.json()
         } else {
           return false
@@ -22,5 +24,19 @@ export default class Api {
       .catch(err => {
         throw new Error('La requete api a échoué : ', err)
       })
+  }
+
+  /**
+   * @param {Object} data
+   * @returns {Response}
+   */
+  async sendFormStory (data) {
+    console.log(data)
+    // Simulate Call API Post
+    return new Promise(function (resolve) {
+      setTimeout(resolve, 1000)
+    }).then(function () {
+      return { status: 200 }
+    })
   }
 }

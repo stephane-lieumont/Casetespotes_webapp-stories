@@ -1,23 +1,42 @@
-import { appOnload } from './scripts/hooks/onload'
-import ApiClass from './scripts/api/Api.class'
-import Route from './scripts/routes/Routes'
+import Header from './scripts/layout/header'
+import Footer from './scripts/layout/footer'
 
-async function app () {
-  // URL params
-  const url = new URL(window.location.href)
-  const params = url.searchParams.get('t')
+import Avatar from './scripts/components/avatar'
+import Loader from './scripts/components/loader'
 
-  // Api request User Profile
-  const Api = new ApiClass(require('./scripts/mock/single.json'))
-  const data = await Api.getProfileByToken(params)
+import { getDataByUrl } from './scripts/app.utils'
+import { router } from './scripts/routes/router'
 
-  const route = new Route(data)
+let data
 
-  // Before load Components
-  appOnload(() => {
-    // After load Components
-    route.init()
-  })
+/**
+ * Initialize application
+ */
+const initApp = async () => {
+  const $app = document.querySelector('#app')
+
+  $app.prepend(Header.render())
+  $app.appendChild(document.createElement('main'))
+  $app.appendChild(Loader.render())
+  $app.appendChild(Footer.render())
+  data = await getDataByUrl()
+
+  const timer = setTimeout(() => {
+    Avatar.createAvatarSingle(data, () => {
+      Loader.destroyLoader()
+      clearTimeout(timer)
+      app()
+    })
+  }, 2500)
 }
 
-app()
+/**
+ * Refresh App DOM
+ */
+const app = () => {
+  // Route Paths
+  router(data)
+}
+
+window.addEventListener('hashchange', app)
+window.addEventListener('load', initApp)

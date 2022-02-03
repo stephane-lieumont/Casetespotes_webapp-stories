@@ -1,4 +1,5 @@
 .form-control {
+  text-align: left;
   position:relative;
   width: 100%;
   max-width: $container-medium;
@@ -48,6 +49,14 @@
       }
     }
 
+    &.error input, &.error textarea {
+      border:2px solid darken($yellow, 10%);
+
+      + label {
+        color: darken($yellow, 10%)
+      } 
+    }
+
     input {
       height: 30px;
       max-width: 300px;
@@ -55,7 +64,7 @@
     }
 
     textarea {
-      min-height: 200px;
+      min-height: 170px;
       width: 100%;
     }
   }

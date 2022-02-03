@@ -1,14 +1,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  overflow: hidden;
+  padding:0 space(0.5);
 
   &__content {
     max-width: $container-large;
     text-align: center;
-    margin-bottom:space(0.5);
 
     &--left {
       text-align: left;
@@ -51,5 +50,16 @@
     max-width: $container-medium;
     margin-left:auto!important;
     margin-right:auto!important;
+  }
+}
+
+@media (max-width: $media-query-mobile) {
+  .container {
+    &__content {
+      padding: 0 space(1);
+      p {
+        text-align: left;
+      }      
+    }
   }
 }

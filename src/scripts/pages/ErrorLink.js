@@ -1,37 +1,29 @@
-import Button from '../components/Button'
+import Button from '../components/button'
 
-export default class ErrorLink {
-  constructor () {
-    this.routeName = 'error_link'
-    this.controls = [
-      new Button(null, 'apple', 'container__action__item', '#'),
-      new Button(null, 'google', 'container__action__item', '#')
-    ]
-  }
-
-  content () {
-    const $node = document.createElement('div')
-    $node.classList.add('container__content')
+const ErrorLink = {
+  /**
+   * Render Component
+   * @returns {HTMLElement}
+   */
+  render: async () => {
+    const $node = document.createElement('main')
+    $node.classList.add('container')
 
     const content = `
-      <h2>Désolé, votre invitation est introuvable</h2>
-      <p class="container--small">Demandez au célibataire de vous envoyer une invitation pour pouvoir rédiger un témoignage</p>
-      <p class="container--medium"><strong>Vous connaissez des potes célibataires ?<br > Participez à l'expérience de Case Tes Potes en téléchargeant l'application</strong></p>
+      <div class="container__content">
+        <h2>Cette invitation n'est pas valide</h2>
+        <p class="container--small">Demandez au célibataire de vous envoyer une invitation pour pouvoir rédiger un témoignage</p>
+        <p class="container--medium"><strong>Vous connaissez des potes célibataires ?<br > Participez à l'expérience de Case Tes Potes en téléchargeant l'application</strong></p>
+      </div>
+      <div class="container__action">
+        ${Button.playstore.render()}
+        ${Button.appstore.render()}
+      </div>
     `
 
     $node.innerHTML = content
-
-    return $node
-  }
-
-  actions () {
-    const $node = document.createElement('div')
-    $node.classList.add('container__action', 'container__action--column')
-
-    this.controls.forEach(button => {
-      $node.appendChild(button.component)
-    })
-
     return $node
   }
 }
+
+export default ErrorLink

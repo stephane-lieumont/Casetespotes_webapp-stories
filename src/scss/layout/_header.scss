@@ -1,7 +1,22 @@
 header {
   position: relative;
-  width: 100%;
-  min-height: 125px;
+  display: flex;
+  align-items: center;
+  width: 90%;
   height: 125px;
+  margin:space(1) 10%;
   max-width: $container-large;
+  transition: height .3s ease-in-out;
+
+  &.header--minify {
+    height: 80px;
+  }
+}
+
+
+@media (max-width: $media-query-mobile-fold) {
+  header {
+    height: 80px;
+    margin:space(0.5);
+  }
 }

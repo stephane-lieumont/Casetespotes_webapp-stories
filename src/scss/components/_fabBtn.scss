@@ -1,0 +1,47 @@
+.fab-btn {
+  position:relative;
+  display:block;
+  height:35px;
+  width: 35px;
+  border-radius: 50%;
+  background: lighten($secondary, 60%);
+  overflow: hidden;
+  text-indent: 999px;
+  opacity: 0;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity .15s ease-in-out;
+
+  &.show {
+    opacity: 1;
+  }
+
+  &--return {
+    &::before {
+      position: absolute;
+      content: "";
+      top:0;
+      left: 0;
+      height: 100%;
+      width: 100%;    
+      opacity: 0;  
+      background-color: #fff;
+      transition: opacity .3s ease-in-out;
+    }
+    &::after {
+      position: absolute;
+      content: "";
+      top:0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transform: translateX(-1px);
+      background: url('../assets/arrow_left.svg') center no-repeat;
+    }
+
+    &:hover::before {
+      opacity: .5;
+    }
+  }
+}
