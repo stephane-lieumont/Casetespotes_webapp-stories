@@ -4,7 +4,7 @@ export default class Api {
   /**
    * @param {string} url
    */
-  constructor (url) {
+  constructor (url = null) {
     this._url = url
   }
 
@@ -24,5 +24,15 @@ export default class Api {
       .catch(err => {
         throw new Error('La requete api a échoué : ', err)
       })
+  }
+
+  async sendFormStory (data) {
+    console.log(data)
+    // Simulate Call API Post
+    return new Promise(function (resolve) {
+      setTimeout(resolve, 1000)
+    }).then(function () {
+      return { status: 200 }
+    })
   }
 }

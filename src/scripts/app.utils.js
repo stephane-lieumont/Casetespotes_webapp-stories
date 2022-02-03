@@ -9,3 +9,8 @@ export const getDataByUrl = () => {
   const Api = new ApiClass(require('../data/single.json'))
   return Api.getProfileByToken(params)
 }
+
+export const sendDataStory = (data) => {
+  const Api = new ApiClass()
+  return Api.sendFormStory(data)
+}

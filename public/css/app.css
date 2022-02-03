@@ -10,8 +10,9 @@ body {
   font-weight: 400;
   font-size: 1rem;
   color: #4B4B4B;
-  min-height: 100vh;
-  margin: 0;
+  height: 100vh;
+  margin: 0 30px;
+  overflow: hidden;
 }
 
 h1, h2, h3, strong {
@@ -19,13 +20,56 @@ h1, h2, h3, strong {
   font-weight: 700;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-*::-webkit-scrollbar {
+/* Hide scrollbar body for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
   display: none;
 }
 
+/* Custom scrollbar*/
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 31px none #ffffff;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #a3a3a3;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track:hover {
+  background: #f2f2f2;
+}
+
+::-webkit-scrollbar-track:active {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* Hide scrollbar for IE, Edge and Firefox */
-* {
+body {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -38,10 +82,9 @@ h1, h2, h3, strong {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px;
   margin: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 header {
@@ -49,15 +92,17 @@ header {
   width: 100%;
   min-height: 125px;
   height: 125px;
+  margin: 30px;
   max-width: 950px;
 }
 
 main {
   width: 100%;
-  margin: 30px 0;
+  margin: 30px;
   opacity: 0;
   min-height: 150px;
   transition: height 0.3s ease-in-out !important;
+  overflow: auto;
 }
 main.show {
   animation: fadein-content 0.5s ease-in 0.3s both;
@@ -73,14 +118,16 @@ main.show {
 }
 .footer {
   position: absolute;
-  margin: 30px;
   bottom: 0;
-  opacity: 0.3;
   font-size: 0.7rem;
+  padding: 30px;
+  width: 100%;
 }
 .footer__content {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  opacity: 0.5;
   gap: 6px;
 }
 .footer a {
@@ -93,6 +140,12 @@ main.show {
 .footer span {
   white-space: nowrap;
   font-weight: 700;
+}
+
+.terms-of-use {
+  padding: 0;
+  margin: 0;
+  padding-right: 30px;
 }
 
 .animation-loader {
@@ -158,9 +211,8 @@ main.show {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  overflow: hidden;
 }
 .container__content {
   max-width: 950px;
@@ -343,14 +395,15 @@ main.show {
   }
 }
 .avatar {
-  height: 136px;
-  width: 136px;
+  flex: 1 0 auto;
+  height: 136px !important;
+  width: 136px !important;
   border-radius: 50%;
   overflow: hidden;
 }
 .avatar img {
-  width: 100%;
-  height: 100%;
+  width: 136px !important;
+  height: 136px !important;
   object-fit: cover;
 }
 
@@ -501,6 +554,12 @@ main.show {
   color: #0B5A6A;
   transform: translate(-15px, -17px) scale(0.8);
 }
+.form-control__input.error input, .form-control__input.error textarea {
+  border: 2px solid #f8a905;
+}
+.form-control__input.error input + label, .form-control__input.error textarea + label {
+  color: #f8a905;
+}
 .form-control__input input {
   height: 30px;
   max-width: 300px;
@@ -517,4 +576,59 @@ main.show {
   color: #b1b1b1;
   font-size: 0.7rem;
   font-style: italic;
+}
+
+.alert {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  padding: 9px 48px;
+  background: #FBBB35;
+  color: white;
+  border-radius: 20px;
+  opacity: 0;
+  animation: show-alert 0.15s ease-in-out forwards;
+  text-align: center;
+}
+.alert p {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.alert.hide {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  animation: hide-alert 0.15s ease-in-out forwards !important;
+}
+.alert::before {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  content: "";
+  height: 100%;
+  width: 25px;
+  background: url(../assets/error.svg) center no-repeat;
+}
+
+@keyframes show-alert {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+@keyframes hide-alert {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 15px);
+  }
 }

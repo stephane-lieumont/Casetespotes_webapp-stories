@@ -1,5 +1,5 @@
 import Button from '../components/button'
-import { getRoute } from '../routes/router'
+import { router, routes, parseLocation, getRoute, getComponentByPath } from '../routes/router'
 
 const Thanks = {
   render: async () => {
@@ -19,7 +19,6 @@ const Thanks = {
 
     $node.innerHTML = content
     $node.classList.add('show')
-    document.querySelector('.logo').onclick = null
     Thanks.eventListeners()
     return $node
   },
@@ -29,7 +28,10 @@ const Thanks = {
   },
 
   redirectToRoute: (e) => {
-    location.href = getRoute('error')
+    console.log('redirect')
+    const path = parseLocation()
+    const component = getComponentByPath(path, routes)
+    component.params.restrictedAccess ? location.href = getRoute('error') : router()
   }
 }
 

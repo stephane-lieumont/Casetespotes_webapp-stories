@@ -1,9 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  overflow: hidden;
 
   &__content {
     max-width: $container-large;

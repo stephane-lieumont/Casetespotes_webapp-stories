@@ -49,6 +49,14 @@
       }
     }
 
+    &.error input, &.error textarea {
+      border:2px solid darken($yellow, 10%);
+
+      + label {
+        color: darken($yellow, 10%)
+      } 
+    }
+
     input {
       height: 30px;
       max-width: 300px;

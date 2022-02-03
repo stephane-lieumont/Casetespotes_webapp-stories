@@ -1,10 +1,12 @@
 import Header from '../layout/header'
 
+import Alert from '../components/alert'
 import EditTestimony from '../pages/editTestimony'
 import Error404 from '../pages/error404'
 import ErrorLink from '../pages/errorLink'
 import Home from '../pages/home'
 import Thanks from '../pages/thanks'
+import TermsOfUse from '../pages/termsOfUse'
 
 export const routes = [
   {
@@ -12,7 +14,8 @@ export const routes = [
     pathName: 'home',
     component: Home,
     params: {
-      headerLogoLow: false
+      headerLogoLow: false,
+      restrictedAccess: true
     }
   },
   {
@@ -20,7 +23,8 @@ export const routes = [
     pathName: 'error',
     component: ErrorLink,
     params: {
-      headerLogoLow: false
+      headerLogoLow: false,
+      restrictedAccess: false
     }
   },
   {
@@ -28,7 +32,8 @@ export const routes = [
     pathName: 'home',
     component: Home,
     params: {
-      headerLogoLow: false
+      headerLogoLow: false,
+      restrictedAccess: true
     }
   },
   {
@@ -36,7 +41,8 @@ export const routes = [
     pathName: 'edit-testimony',
     component: EditTestimony,
     params: {
-      headerLogoLow: true
+      headerLogoLow: true,
+      restrictedAccess: true
     }
   },
   {
@@ -44,7 +50,17 @@ export const routes = [
     pathName: 'thanks',
     component: Thanks,
     params: {
-      headerLogoLow: false
+      headerLogoLow: false,
+      restrictedAccess: true
+    }
+  },
+  {
+    path: '/conditions-generales',
+    pathName: 'terms-of-use',
+    component: TermsOfUse,
+    params: {
+      headerLogoLow: false,
+      restrictedAccess: false
     }
   }
 ]
@@ -53,26 +69,18 @@ export const routes = [
  * Redirect to other routes
  * @param {ObjectJSON} data
  */
-export const router = async (data) => {
+export const router = async (data = null) => {
+  // add name and parameters to Object component
+  constructComponents(routes)
+
   // Find the component based on the current path
   const path = parseLocation()
 
-  // If there is not matching route, get the "Error404" Component || If there mistake on token, get the "ErrorLink" Component
-  const { component = Error404 } = data ? getComponentByPath(path, routes) || {} : { component: ErrorLink }
-
-  // Get routes parameters
-  applyParams(component.params)
+  // Get Component by routes with restricted area
+  const component = selectComponent(path, routes, data)
 
   // Render the component in the app placeholder
-  const oldHeigthContainer = document.querySelector('#app main').clientHeight + 'px'
-  document.querySelector('#app').replaceChild(await component.render(data), document.querySelector('#app main'))
-
-  // Transition heigth main component
-  const newHeigthContainer = document.querySelector('#app main').clientHeight + 'px'
-  document.querySelector('#app main').style.height = oldHeigthContainer
-  setTimeout(() => {
-    document.querySelector('#app main').style.height = newHeigthContainer
-  }, 100)
+  await renderComponent(component, data)
 }
 
 /**
@@ -91,13 +99,13 @@ export const getRoute = (pathName) => {
  * @param {Object} routes
  * @returns {Object}
  */
-const getComponentByPath = (path, routes) => routes.find(r => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined
+export const getComponentByPath = (path, routes) => routes.find(r => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined
 
 /**
  * Get path from location
  * @returns {String}
  */
-const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/'
+export const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/'
 
 /**
  * Apply params of routes
@@ -107,6 +115,45 @@ const applyParams = (params) => {
   if (params && params.headerLogoLow !== undefined) Header.logoLow(params.headerLogoLow)
 }
 
+const selectComponent = (path, routes, data) => {
+  const componentObject = getComponentByPath(path, routes)
+  let component
+
+  if (componentObject === undefined) {
+    component = Error404
+  } else if (!data && componentObject.params.restrictedAccess) {
+    component = ErrorLink
+  } else {
+    component = componentObject.component
+  }
+
+  // apply params routes
+  applyParams(component.params)
+
+  return component
+}
+
+const renderComponent = async (component, data) => {
+  const headerHeight = document.querySelector('#app header').clientHeight
+  const footerHeight = document.querySelector('#app header').clientHeight
+  const maxMainHeight = document.querySelector('#app').clientHeight - headerHeight - footerHeight - 80
+
+  const oldHeigthContainer = document.querySelector('#app main').clientHeight
+  document.querySelector('#app').replaceChild(await component.render(data), document.querySelector('#app main'))
+
+  // Transition heigth main component
+  const newHeigthContainer = document.querySelector('#app main').clientHeight
+
+  // Destroy alert forms
+  Alert.destroyAlert()
+
+  document.querySelector('#app main').style.height = oldHeigthContainer + 'px'
+  document.querySelector('#app main').style.maxHeight = maxMainHeight + 'px'
+  setTimeout(() => {
+    document.querySelector('#app main').style.height = newHeigthContainer + 'px'
+  }, 100)
+}
+
 const constructComponents = (routes) => {
   routes.forEach(route => {
     route.component.name = route.pathName
@@ -114,6 +161,3 @@ const constructComponents = (routes) => {
     route.component.path = route.path
   })
 }
-
-// add name and parameters to Object component
-constructComponents(routes)
