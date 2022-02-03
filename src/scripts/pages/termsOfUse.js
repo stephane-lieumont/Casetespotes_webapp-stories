@@ -2,7 +2,7 @@
 const TermsOfUse = {
   render: () => {
     const $node = document.createElement('main')
-    $node.classList.add('container--medium', 'show')
+    $node.classList.add('container--medium')
 
     const content = `
       <div class="terms-of-use">

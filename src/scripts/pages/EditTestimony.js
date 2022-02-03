@@ -2,6 +2,7 @@ import Store from '../store/store'
 import Button from '../components/button'
 import Popup from '../components/popup'
 import Alert from '../components/alert'
+import Avatar from '../components/avatar'
 import popupAnimation from '@/assets/lottie/validateCheck.json'
 import { sendDataStory } from '../app.utils'
 
@@ -15,15 +16,12 @@ const EditTestimony = {
     })
 
     const $node = document.createElement('main')
-    $node.classList.add('container')
+    $node.classList.add('container', 'load')
 
     const content = `
-      <div class="avatar">
-        <img src="${data.picture}" alt="${data.firstname}"/>
-      </div>
       <div class="container__content">
         <h2>Décrivez votre amie ${data.firstname}</h2>
-        <p class="container--small">Quelles sont ses préférences, ses qualités, une petite anecdote…<br /> La description sera ensuite envoyée à Julie qui décidera de l’afficher sur son profil.</p>
+        <p class="container--small">Quelles sont ses préférences, ses qualités, une petite anecdote… La description sera ensuite envoyée à Julie qui décidera de l’afficher sur son profil.</p>
         <form class="form-control">
           <div class="form-control__input">
             <input type="text"  name="name" value="${Store.formEditStory.inputName}" />
@@ -42,6 +40,7 @@ const EditTestimony = {
     `
 
     $node.innerHTML = content
+    $node.prepend(Avatar.render(data, $node))
     EditTestimony.eventListener($node)
 
     return $node
@@ -61,12 +60,6 @@ const EditTestimony = {
       EditTestimony.hideAlert()
     })
     HTMLElement.querySelector('form button').addEventListener('click', EditTestimony.sendForm)
-
-    // Load Avatar Image
-    const image = HTMLElement.querySelector('.avatar img')
-    const downloadingImage = new Image()
-    downloadingImage.src = image.src
-    downloadingImage.onload = () => HTMLElement.classList.add('show')
   },
 
   renderPopup: () => {

@@ -1,12 +1,13 @@
 import Header from '../layout/header'
 
-import Alert from '../components/alert'
 import EditTestimony from '../pages/editTestimony'
 import Error404 from '../pages/error404'
 import ErrorLink from '../pages/errorLink'
 import Home from '../pages/home'
 import Thanks from '../pages/thanks'
 import TermsOfUse from '../pages/termsOfUse'
+
+import Alert from '../components/alert'
 
 export const routes = [
   {
@@ -15,6 +16,7 @@ export const routes = [
     component: Home,
     params: {
       headerLogoLow: false,
+      headerReturnBtn: false,
       restrictedAccess: true
     }
   },
@@ -24,6 +26,7 @@ export const routes = [
     component: ErrorLink,
     params: {
       headerLogoLow: false,
+      headerReturnBtn: false,
       restrictedAccess: false
     }
   },
@@ -33,6 +36,7 @@ export const routes = [
     component: Home,
     params: {
       headerLogoLow: false,
+      headerReturnBtn: false,
       restrictedAccess: true
     }
   },
@@ -42,6 +46,7 @@ export const routes = [
     component: EditTestimony,
     params: {
       headerLogoLow: true,
+      headerReturnBtn: true,
       restrictedAccess: true
     }
   },
@@ -51,6 +56,7 @@ export const routes = [
     component: Thanks,
     params: {
       headerLogoLow: false,
+      headerReturnBtn: false,
       restrictedAccess: true
     }
   },
@@ -60,6 +66,7 @@ export const routes = [
     component: TermsOfUse,
     params: {
       headerLogoLow: false,
+      headerReturnBtn: true,
       restrictedAccess: false
     }
   }
@@ -113,6 +120,7 @@ export const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() ||
  */
 const applyParams = (params) => {
   if (params && params.headerLogoLow !== undefined) Header.logoLow(params.headerLogoLow)
+  params && params.headerReturnBtn ? Header.addBtnReturn() : Header.destroyBtnReturn()
 }
 
 const selectComponent = (path, routes, data) => {
@@ -134,21 +142,16 @@ const selectComponent = (path, routes, data) => {
 }
 
 const renderComponent = async (component, data) => {
-  const headerHeight = document.querySelector('#app header').clientHeight
-  const footerHeight = document.querySelector('#app header').clientHeight
-  const maxMainHeight = document.querySelector('#app').clientHeight - headerHeight - footerHeight - 80
-
   const oldHeigthContainer = document.querySelector('#app main').clientHeight
   document.querySelector('#app').replaceChild(await component.render(data), document.querySelector('#app main'))
 
   // Transition heigth main component
-  const newHeigthContainer = document.querySelector('#app main').clientHeight
+  const newHeigthContainer = document.querySelector('#app main').clientHeight + 25
 
   // Destroy alert forms
   Alert.destroyAlert()
 
   document.querySelector('#app main').style.height = oldHeigthContainer + 'px'
-  document.querySelector('#app main').style.maxHeight = maxMainHeight + 'px'
   setTimeout(() => {
     document.querySelector('#app main').style.height = newHeigthContainer + 'px'
   }, 100)

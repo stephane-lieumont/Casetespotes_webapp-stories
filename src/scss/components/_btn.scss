@@ -167,3 +167,44 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+@media (max-width: $media-query-mobile-fold) {
+  .btn{
+    min-height: 30px;
+    min-width: 100px;
+    border-radius: 5px;
+    padding:space(0.2) space(0.3);
+    font-weight: $font-bold;
+    font-size: 0.8rem!important;
+
+    strong {
+      font-size: 1.2rem!important;
+    }
+
+    &::before {
+      height:30px;
+      width: 30px;
+    }
+
+    &__icon {
+      &::before {
+        margin-left:space(0.3)!important;
+      }
+    }
+
+    &__label {
+      font-weight: $font-bold;
+      font-size: 0.8rem;
+    }
+  
+    &__caption {
+      font-weight: $font-light!important;
+      font-size: 0.65rem;
+      margin-top:5px;
+    }
+  }
+}
+
+

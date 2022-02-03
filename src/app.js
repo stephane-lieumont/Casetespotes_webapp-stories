@@ -1,6 +1,7 @@
 import Header from './scripts/layout/header'
 import Footer from './scripts/layout/footer'
 
+import Avatar from './scripts/components/avatar'
 import Loader from './scripts/components/loader'
 
 import { getDataByUrl } from './scripts/app.utils'
@@ -21,9 +22,11 @@ const initApp = async () => {
   data = await getDataByUrl()
 
   const timer = setTimeout(() => {
-    Loader.destroyLoader()
-    clearTimeout(timer)
-    app()
+    Avatar.createAvatarSingle(data, () => {
+      Loader.destroyLoader()
+      clearTimeout(timer)
+      app()
+    })
   }, 2500)
 }
 

@@ -7,6 +7,7 @@ const ErrorLink = {
 
     const content = `
       <div class="container__content">
+        <h2>Cette invitation n'est pas valide</h2>
         <p class="container--small">Demandez au célibataire de vous envoyer une invitation pour pouvoir rédiger un témoignage</p>
         <p class="container--medium"><strong>Vous connaissez des potes célibataires ?<br > Participez à l'expérience de Case Tes Potes en téléchargeant l'application</strong></p>
       </div>
@@ -17,7 +18,6 @@ const ErrorLink = {
     `
 
     $node.innerHTML = content
-    $node.classList.add('show')
     return $node
   }
 }

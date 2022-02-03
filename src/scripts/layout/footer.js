@@ -11,7 +11,7 @@ const Footer = {
         <a href="${getRoute('terms-of-use')}">Conditions générales</a>
         <a href="${conf.links.instagram}">Instagram</a>
         <a href="${conf.links.facebook}">Facebook</a>
-        <span>CaseTesPotes © 2022</span>
+        <span>CaseTesPotes © ${(new Date()).getFullYear()}</span>
       </div>`
     $node.innerHTML = content
     return $node

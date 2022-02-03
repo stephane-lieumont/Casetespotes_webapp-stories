@@ -6,9 +6,9 @@ const Thanks = {
     const $node = document.createElement('main')
     $node.classList.add('container')
 
-    const content = `
-      <h2>Merci pour votre réponse !</h2>
+    const content = `      
       <div class="container__content">
+        <h2>Merci pour votre réponse !</h2>
         <p class="container--medium">Connaitrais tu un(e) pote célib qui aurait besoin de coup de main pour trouver l’âme sœur ?</p>
       </div>
       <div class="container__action">
@@ -18,7 +18,6 @@ const Thanks = {
     `
 
     $node.innerHTML = content
-    $node.classList.add('show')
     Thanks.eventListeners()
     return $node
   },
@@ -28,7 +27,6 @@ const Thanks = {
   },
 
   redirectToRoute: (e) => {
-    console.log('redirect')
     const path = parseLocation()
     const component = getComponentByPath(path, routes)
     component.params.restrictedAccess ? location.href = getRoute('error') : router()

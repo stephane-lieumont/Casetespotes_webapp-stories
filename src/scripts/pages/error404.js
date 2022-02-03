@@ -9,7 +9,6 @@ const Error404 = {
     `
 
     $node.innerHTML = content
-    $node.classList.add('show')
     return $node
   }
 }
