@@ -6,7 +6,7 @@ const Header = {
   render: () => {
     const $node = document.createElement('header')
     const content = `
-      <img class="logo" data-target="home" width="254" height="125" src="${require('@/assets/logo-case-tes-potes.svg')}" onclick="location.href='${getRoute('home')}'" alt="case tes potes">
+      <img class="logo" data-target="home" data-testid="logo" width="254" height="125" src="${require('../../assets/logo-case-tes-potes.svg')}" onclick="location.href='${getRoute('home')}'" alt="case tes potes">
     `
     $node.innerHTML = content
     Header.wrapper = $node
@@ -14,10 +14,10 @@ const Header = {
   },
   logoLow: (isLow) => {
     if (isLow) {
-      document.querySelector('.logo').classList.add('logo--low')
+      Header.wrapper.querySelector('.logo').classList.add('logo--low')
       Header.wrapper.classList.add('header--minify')
     } else {
-      document.querySelector('.logo').classList.remove('logo--low')
+      Header.wrapper.querySelector('.logo').classList.remove('logo--low')
       Header.wrapper.classList.remove('header--minify')
     }
   },
@@ -36,8 +36,8 @@ const Header = {
     }, 600)
   },
   destroyBtnReturn: () => {
-    if (document.querySelector('.fab-btn--return')) {
-      const $node = document.querySelector('.fab-btn--return')
+    if (Header.wrapper.querySelector('.fab-btn--return')) {
+      const $node = Header.wrapper.querySelector('.fab-btn--return')
       $node.classList.remove('show')
       const timer = setTimeout(() => {
         $node.remove()

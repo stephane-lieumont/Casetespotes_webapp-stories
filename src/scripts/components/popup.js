@@ -17,7 +17,7 @@ const Popup = {
     $node.classList.add('overlay')
 
     const content = `
-      <div class="popup">
+      <div class="popup" data-testid="popup">
         <div class="popup__header">
           <h2>${Popup.title}</h2>
         </div>
@@ -59,8 +59,6 @@ const Popup = {
       wrapper += '</div>'
 
       return wrapper
-    } else {
-      return ''
     }
   },
 
@@ -89,6 +87,7 @@ const Popup = {
     const timer = setTimeout(() => {
       Popup.lottieObject.destroy()
       Popup.wrapper.remove()
+      Popup.wrapper = null
       clearTimeout(timer)
     }, 500)
   }

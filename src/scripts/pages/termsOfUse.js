@@ -1,5 +1,6 @@
 
 const TermsOfUse = {
+  wrapper: null,
   /**
    * Render component
    * @returns {HTMLElement}
@@ -9,7 +10,7 @@ const TermsOfUse = {
     $node.classList.add('container--medium')
 
     const content = `
-      <div class="terms-of-use">
+      <div class="terms-of-use" data-testid="term-of-rules">
         <h2>Identification</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -51,6 +52,7 @@ const TermsOfUse = {
       </div>
     `
     $node.innerHTML = content
+    TermsOfUse.wrapper = $node
 
     return $node
   }

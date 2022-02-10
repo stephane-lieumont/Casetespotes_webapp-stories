@@ -1,5 +1,5 @@
 import lottie from 'lottie-web'
-import loaderAnimation from '@/assets/lottie/lottieLoader.json'
+import loaderAnimation from '../../assets/lottie/lottieLoader.json'
 
 const Loader = {
   wrapper: null,
@@ -24,7 +24,7 @@ const Loader = {
    */
   destroyLoader () {
     Loader.lottieObject.destroy()
-    document.querySelector('.animation-loader').remove()
+    Loader.wrapper.remove()
   },
   /**
    * Render component
