@@ -7,6 +7,11 @@ import Loader from './scripts/components/loader'
 import { getDataByUrl } from './scripts/app.utils'
 import { router } from './scripts/routes/router'
 
+/** ADD FAVICON ON HEADER PAGE */
+require('./assets/favicon/apple-touch-icon.png')
+require('./assets/favicon/favicon-16x16.png')
+require('./assets/favicon/favicon-32x32.png')
+
 let data
 
 /**

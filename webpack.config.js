@@ -89,7 +89,14 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: 'src/index.ejs'
+      template: 'src/index.ejs',
+      favicons: {
+        android512: 'assets/android-chrome-512x512.png',
+        android192: 'assets/android-chrome-192x192.png',
+        appleTouch: 'assets/apple-touch-icon.png',
+        favicon16: 'assets/favicon-16x16.png',
+        favicon32: 'assets/favicon-32x32.png'
+      }
     }),
     new ESLintPlugin({
       overrideConfigFile: path.resolve(__dirname, '.eslintrc')
