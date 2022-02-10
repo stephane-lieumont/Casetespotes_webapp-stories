@@ -11,9 +11,7 @@ const Avatar = {
       container.classList.remove('load')
       return Avatar.wrapper
     } else {
-      return Avatar.createAvatarSingle(data, () => {
-        container.classList.remove('load')
-      })
+      return Avatar.createAvatarSingle(data, Avatar.removeLoad(container))
     }
   },
   /**
@@ -41,6 +39,10 @@ const Avatar = {
       callback()
       return null
     }
+  },
+
+  removeLoad: (container) => {
+    container.classList.remove('load')
   }
 }
 

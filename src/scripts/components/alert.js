@@ -8,7 +8,7 @@ const Alert = {
   render: () => {
     const $node = document.createElement('div')
     $node.classList.add('alert')
-    $node.innerHTML = `<p>${Alert.content}</p>`
+    $node.innerHTML = `<p data-testid="alert">${Alert.content}</p>`
 
     Alert.wrapper = $node
 
@@ -22,6 +22,7 @@ const Alert = {
       Alert.wrapper.classList.add('hide')
       const timer = setTimeout(() => {
         Alert.wrapper.remove()
+        Alert.wrapper = null
         clearTimeout(timer)
       }, 150)
     }

@@ -2,11 +2,11 @@ import Header from '../layout/header'
 import Alert from '../components/alert'
 
 import EditTestimony from '../pages/editTestimony'
-import Error404 from '../pages/error404'
+import Error404 from '../pages/Error404'
 import ErrorLink from '../pages/errorLink'
 import Home from '../pages/home'
 import Thanks from '../pages/thanks'
-import TermsOfUse from '../pages/termsOfUse'
+import TermsOfUse from '../pages/TermsOfUse'
 
 /**
  * Define routes with params
@@ -78,7 +78,7 @@ export const routes = [
  * Redirect to other routes
  * @param {ObjectJSON} data
  */
-export const router = async (data = null) => {
+export const router = (data = null) => {
   // add name and parameters to Object component
   constructComponents(routes)
 
@@ -89,7 +89,7 @@ export const router = async (data = null) => {
   const component = selectComponent(path, routes, data)
 
   // Render the component in the app placeholder
-  await renderComponent(component, data)
+  renderComponent(component, data)
 }
 
 /**
@@ -155,9 +155,9 @@ const selectComponent = (path, routes, data) => {
  * @param {Object} component
  * @param {Object} data
  */
-const renderComponent = async (component, data) => {
+const renderComponent = (component, data) => {
   const oldHeigthContainer = document.querySelector('#app main').clientHeight
-  document.querySelector('#app').replaceChild(await component.render(data), document.querySelector('#app main'))
+  document.querySelector('#app').replaceChild(component.render(data), document.querySelector('#app main'))
 
   // Transition heigth main component
   const newHeigthContainer = document.querySelector('#app main').clientHeight + 25

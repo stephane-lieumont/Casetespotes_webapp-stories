@@ -28,7 +28,7 @@ const Button = {
      */
     render: (label, pathName, action = 'default') => {
       return `
-        <button class="btn btn--blue" data-action="${action}" ${Button.getPathLink(pathName)}>
+        <button class="btn btn--blue" data-testid="button" data-action="${action}" ${Button.getPathLink(pathName)}>
           <span class="btn__label">${label}</span>
         </button>
       `
@@ -101,7 +101,7 @@ const Button = {
      */
     render: (label, pathName, action = 'default') => {
       return `
-        <button class="btn btn--primary btn__icon btn__icon--send" data-action="${action}" ${Button.getPathLink(pathName)} >
+        <button class="btn btn--primary btn__icon btn__icon--send" data-testid="submit" data-action="${action}" ${Button.getPathLink(pathName)} >
           <span class="btn__content">
             <span class="btn__label">${label}</span>
             <span class="btn__caption">280 caractères max</span>

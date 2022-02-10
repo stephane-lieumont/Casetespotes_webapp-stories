@@ -2,16 +2,17 @@ import Button from '../components/button'
 import { router, routes, parseLocation, getRoute, getComponentByPath } from '../routes/router'
 
 const Thanks = {
+  wrapper: null,
   /**
    * Render Component
    * @returns {HTMLElement}
    */
-  render: async () => {
+  render: () => {
     const $node = document.createElement('main')
     $node.classList.add('container')
 
     const content = `      
-      <div class="container__content">
+      <div class="container__content" data-testid="thanks">
         <h2>Merci pour votre réponse !</h2>
         <p class="container--medium">Connaitrais tu un(e) pote célib qui aurait besoin de coup de main pour trouver l’âme sœur ?</p>
       </div>
@@ -23,6 +24,7 @@ const Thanks = {
 
     $node.innerHTML = content
     Thanks.eventListeners()
+    Thanks.wrapper = $node
     return $node
   },
 

@@ -11,7 +11,7 @@ const Footer = {
     $node.classList.add('footer')
     const content = `
       <div class="footer__content">
-        <a href="${getRoute('terms-of-use')}">Conditions générales</a>
+        <a href="${getRoute('terms-of-use')}" data-testid="rules">Conditions générales</a>
         <a href="${conf.links.instagram}">Instagram</a>
         <a href="${conf.links.facebook}">Facebook</a>
         <span>CaseTesPotes © ${(new Date()).getFullYear()}</span>
