@@ -73,3 +73,9 @@ body {
   width: 100%;
   height: 100vh;
 }
+
+@media (max-width: $media-query-mobile) {
+  #app{
+    max-height: 93vh;
+  }
+}
