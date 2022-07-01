@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // Minify Css
 const { CleanWebpackPlugin } = require('clean-webpack-plugin') // Clean derectories before generate files
 const HtmlWebpackPlugin = require('html-webpack-plugin') // Inject les liens dynamique des fichier hashé
 const ESLintPlugin = require('eslint-webpack-plugin') // ESlint
+const Dotenv = require('dotenv-webpack') // ENV
 
 const path = require('path')
 
@@ -75,6 +76,7 @@ const config = {
   },
 
   plugins: [
+    new Dotenv(),
     new CleanWebpackPlugin({
       dry: false, // tester la configuration "true" avant de clean
       cleanStaleWebpackAssets: false,

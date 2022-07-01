@@ -2,50 +2,56 @@
 /* eslint-disable no-undef */
 
 import * as mockConfig from '../__config__/app.config.mock'
-import * as mockSingle from '../__mocks__/single.mock.json'
+import * as mockStoryForm from '../__mocks__/storyForm.mock.json'
 import * as mockStory from '../__mocks__/story.mock.json'
 import fetchMock from 'jest-fetch-mock'
 import Api from '../../scripts/api/Api.class'
 
 fetchMock.enableMocks()
+jest.mock('../../scripts/app.conf.js', () => mockConfig)
 
 describe('Given fetch data from API', () => {
   let handleRequestGet
   let handleRequestPost
 
   beforeAll(() => {
-    fetch.mockClear()
-    fetch.mockResponse(JSON.stringify(mockSingle))
+    fetch.resetMocks()
   })
   describe('When the url have valid token', () => {
-    beforeAll(async () => {
+    test('It should getStoryObject', async () => {
+      const token = 'fdsqfds'
+      const singleId = '62bd4c5aa9a92f00120d82bc'
+
+      fetch.mockResponseOnce(JSON.stringify(mockStory), { status: 200, headers: { 'content-type': 'application/json' } })
+
       handleRequestGet = jest.fn(async () => {
-        const mockApi = new Api('https://www.ctp.com/')
-        mockApi.token = mockConfig.conf.apptokenTMP
-        return await mockApi.getProfileByToken('test')
+        const mockApi = new Api(singleId, token)
+        return await mockApi.getStory()
       })
-    })
-    test('It should getProfileObject', async () => {
+
       const result = await handleRequestGet()
 
       expect(handleRequestGet).toHaveBeenCalled()
       expect(result.id).toBeTruthy()
+      expect(result.singleId).toBe(singleId)
     })
   })
 
   describe('When the url have invalid token', () => {
-    beforeAll(async () => {
-      handleRequestGet = jest.fn(async () => {
-        const mockApi = new Api('https://www.ctp.com/')
-        mockApi.token = mockConfig.conf.apptokenTMP
-        return await mockApi.getProfileByToken('fail')
-      })
-    })
     test('It should getProfileObject', async () => {
-      const result = await handleRequestGet()
+      fetch.mockResponseOnce('{}', { status: 200, headers: { 'content-type': 'application/json' } })
 
+      handleRequestGet = jest.fn(async () => {
+        const mockApi = new Api('test', 'test')
+        try {
+          return await mockApi.getStory()
+        } catch {
+          throw new TypeError()
+        }
+      })
+
+      await expect(handleRequestGet()).rejects.toThrowError()
       expect(handleRequestGet).toHaveBeenCalled()
-      expect(result).toBeFalsy()
     })
   })
 
@@ -55,9 +61,8 @@ describe('Given fetch data from API', () => {
         jest.fn().mockRejectedValueOnce(() => { throw new Error('500') })
       )
       handleRequestGet = jest.fn(async () => {
-        const mockApi = new Api('https://www.ctp.com/')
-        mockApi.token = mockConfig.conf.apptokenTMP
-        return await mockApi.getProfileByToken('fail')
+        const mockApi = new Api('6095437aba548853b8fc076d', 'fdsqfds')
+        return await mockApi.getStory('fail')
       })
     })
     test('It should getProfileObject', async () => {
@@ -67,28 +72,30 @@ describe('Given fetch data from API', () => {
   })
 
   describe('When I send form testimony', () => {
-    beforeAll(async () => {
-      handleRequestPost = jest.fn(async () => {
-        const mockApi = new Api('https://www.ctp.com/')
-        return await mockApi.sendFormStory(mockStory)
-      })
-    })
     test('it should send form on Api', async () => {
+      fetch.mockResponseOnce('{"message":"OK"}', { status: 200, headers: { 'content-type': 'application/json' } })
+
+      handleRequestPost = jest.fn(async () => {
+        const mockApi = new Api()
+        return mockApi.sendFormStory(mockStoryForm)
+      })
+
       const result = await handleRequestPost()
 
       expect(handleRequestPost).toHaveBeenCalled()
-      expect(result.status).toBe(200)
+      expect(result.message).toBe('OK')
     })
   })
 
   describe('When I send form testimony and i have api error', () => {
-    beforeAll(async () => {
-      handleRequestPost = jest.fn(async () => {
-        const mockApi = new Api('https://www.ctp.com/')
-        return await mockApi.sendFormStory({})
-      })
-    })
     test('it should return an error', async () => {
+      fetch.mockResponseOnce('{}', { status: 500, headers: { 'content-type': 'application/json' } })
+
+      handleRequestPost = jest.fn(async () => {
+        const mockApi = new Api('6095437aba548853b8fc076d', 'fdsqfds')
+        return mockApi.sendFormStory(mockStoryForm)
+      })
+
       expect.assertions(1)
       await expect(handleRequestPost()).rejects.toThrowError()
     })

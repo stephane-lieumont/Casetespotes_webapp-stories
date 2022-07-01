@@ -1,9 +1,11 @@
 export const conf = {
-  apptokenTMP: 'test',
+  apiHost: 'localhost',
+  apiScheme: 'http',
+  apiPort: 80,
 
   links: {
-    instagram: 'https://www.instagram.com/case_tes_potes',
-    facebook: 'https://www.facebook.com/CaseTesPotes',
+    instagram: '#',
+    facebook: '#',
     appstore: '#',
     playstore: '#'
   }

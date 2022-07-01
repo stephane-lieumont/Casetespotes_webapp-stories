@@ -5,7 +5,7 @@
   "scripts": {
     "prod": "env NODE_ENV=production webpack",
     "dev": "env NODE_ENV=development webpack",
-    "test": "jest"
+    "test": "jest --watchAll --coverage"
   },
   "author": "Stéphane LIEUMONT",
   "license": "ISC",
@@ -21,9 +21,9 @@
     "babel-loader": "^8.2.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
-    "canvas": "^2.9.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
+    "dotenv-webpack": "^7.1.1",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",

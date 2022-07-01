@@ -26,9 +26,10 @@ module.exports = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "\\\\node_modules\\\\"
-  // ],
+  coveragePathIgnorePatterns: [
+    'node_modules/',
+    'src/app.js'
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
@@ -78,7 +79,8 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^.+\\.svg$': 'jest-transform-stub'
+    '^.+\\.svg$': 'jest-transform-stub',
+    '^.+\\.png$': 'jest-transform-stub'
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -145,7 +147,6 @@ module.exports = {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    '**/__tests__/**/*.[jt]s?(x)',
     '**/?(*.)+(spec|test).[tj]s?(x)'
   ],
 
@@ -153,9 +154,6 @@ module.exports = {
   // testPathIgnorePatterns: [
   //   "\\\\node_modules\\\\"
   // ],
-
-  // The regexp pattern or array of patterns that Jest uses to detect test files
-  // testRegex: [],
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: undefined,

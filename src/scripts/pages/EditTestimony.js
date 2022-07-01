@@ -1,15 +1,16 @@
 import Store from '../store/store'
-import Button from '../components/button'
-import Popup from '../components/popup'
-import Alert from '../components/alert'
-import Avatar from '../components/avatar'
+import Button from '../components/Button'
+import Popup from '../components/Popup'
+import Alert from '../components/Alert'
+import Avatar from '../components/Avatar'
 import popupAnimation from '../../assets/lottie/validateCheck.json'
-import { sendDataStory } from '../app.utils'
+import { apiPublic } from '../../app'
 
 const EditTestimony = {
   wrapper: null,
   inputMaxLength: 280,
   data: null,
+  apiObject: null,
   /**
    * @param {Object} data
    * @returns {HTMLElement}
@@ -20,20 +21,22 @@ const EditTestimony = {
       writable: false
     })
 
+    EditTestimony.data = data
+
     const $node = document.createElement('main')
     $node.classList.add('container', 'load')
 
     const content = `
       <div class="container__content">
         <h2>Décrivez votre amie ${data.firstname}</h2>
-        <p class="container--small">Quelles sont ses préférences, ses qualités, une petite anecdote… La description sera ensuite envoyée à Julie qui décidera de l’afficher sur son profil.</p>
+        <p class="container--small">Quelles sont ses préférences, ses qualités, une petite anecdote…<br /> La description sera ensuite envoyée à Julie qui décidera de l’afficher sur son profil.</p>
         <form class="form-control" data-testid="form">
           <div class="form-control__input">
-            <input type="text"  name="name" data-testid="input-name" value="${Store.formEditStory.inputName}" />
-            <label>Prénom ou surnom</label>
+            <input type="text"  name="email" data-testid="input-email" value="${Store.formEditStory.inputEmail}" />
+            <label>Email</label>
           </div>
           <div class="form-control__input">
-            <textarea name="story"  data-testid="input-story" data-value="${Store.formEditStory.inputStory}">${Store.formEditStory.inputStory}</textarea>
+            <textarea name="content"  data-testid="input-story" data-value="${Store.formEditStory.inputStory}">${Store.formEditStory.inputStory}</textarea>
             <label>Votre témoignage</label>
             <div class="form-control__char"><span>Reste ${EditTestimony.inputMaxLength}</span> caractères</div>
           </div>
@@ -56,14 +59,14 @@ const EditTestimony = {
    * @param {HTMLElement} HTMLElement
    */
   eventListener: () => {
-    EditTestimony.wrapper.querySelector('input').addEventListener('input', EditTestimony.changeInputName)
+    EditTestimony.wrapper.querySelector('input').addEventListener('input', EditTestimony.changeInputEmail)
     EditTestimony.wrapper.querySelector('textarea').addEventListener('input', EditTestimony.changeInputStory)
     EditTestimony.wrapper.querySelector('form button').addEventListener('click', EditTestimony.sendForm)
   },
 
-  changeInputName: (e) => {
+  changeInputEmail: (e) => {
     e.target.setAttribute('value', e.target.value)
-    Store.formEditStory.inputName = e.target.value
+    Store.formEditStory.inputEmail = e.target.value
     EditTestimony.hideAlert()
   },
 
@@ -143,14 +146,17 @@ const EditTestimony = {
    * @returns {Boolean}
    */
   validateForm: (dataSubmit) => {
-    const inputName = EditTestimony.wrapper.querySelector('input[name="name"]').parentNode
-    const inputStory = EditTestimony.wrapper.querySelector('textarea[name="story"]').parentNode
+    const inputEmail = EditTestimony.wrapper.querySelector('input[name="email"]').parentNode
+    const inputStory = EditTestimony.wrapper.querySelector('textarea[name="content"]').parentNode
     const errorList = []
 
     // Check inputs value length
 
-    if (dataSubmit.name.length < 3) errorList.push({ error: 'Veuillez saisir le champs prénom', input: inputName })
-    if (dataSubmit.story.length < 3) errorList.push({ error: 'Veuillez rédiger votre témoignage', input: inputStory })
+    if (dataSubmit.email.length < 3) errorList.push({ error: 'Veuillez saisir le champs email', input: inputEmail })
+    if (dataSubmit.content.length < 30) errorList.push({ error: 'Veuillez rédiger votre témoignage', input: inputStory })
+    if (!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(dataSubmit.email.toLowerCase())) {
+      errorList.push({ error: 'Veuillez saisir un email valide', input: inputEmail })
+    }
 
     if (errorList.length === 0) {
       EditTestimony.hideAlert()
@@ -165,28 +171,29 @@ const EditTestimony = {
    * Send form on Database
    * @param {ClickEvent} e
    */
-  sendForm: (e) => {
+  sendForm: async (e) => {
     e.preventDefault()
     e.target.classList.add('btn--load')
 
+    // init formData
     const form = document.querySelector('form')
     const formData = new FormData(form)
     const dataSubmit = Object.fromEntries(formData.entries())
+    dataSubmit.id = EditTestimony.data.id
 
     if (EditTestimony.validateForm(dataSubmit)) {
-      sendDataStory(dataSubmit)
-        .then((response) => {
-          if (response.status === 200) {
-            EditTestimony.renderPopup()
-            e.target.classList.remove('btn--load')
-          } else {
-            throw new Error()
-          }
-        })
-        .catch(() => {
-          EditTestimony.displayAlert([{ error: 'Un erreur c\'est produite lors de l\'enregistrement des données' }])
-          e.target.classList.remove('btn--load')
-        })
+      try {
+        await apiPublic.sendFormStory(dataSubmit)
+        EditTestimony.renderPopup()
+      } catch (e) {
+        if (e.toString().includes('Wrong hash')) {
+          EditTestimony.displayAlert([{ error: 'L\'email que vous avez saisie ne correspond pas à l\'invitation' }])
+        } else {
+          EditTestimony.displayAlert([{ error: 'Une erreur c\'est produite lors de l\'enregistrement des données' }])
+        }
+      }
+
+      e.target.classList.remove('btn--load')
     } else {
       e.target.classList.remove('btn--load')
     }

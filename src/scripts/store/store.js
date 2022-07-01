@@ -3,7 +3,7 @@
  */
 const Store = {
   formEditStory: {
-    inputName: '',
+    inputEmail: '',
     inputStory: ''
   }
 }

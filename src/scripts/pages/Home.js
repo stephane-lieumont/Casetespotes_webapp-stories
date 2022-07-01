@@ -1,5 +1,5 @@
-import Avatar from '../components/avatar'
-import Button from '../components/button'
+import Avatar from '../components/Avatar'
+import Button from '../components/Button'
 
 const Home = {
   wrapper: null,

@@ -1,37 +1,36 @@
 import { conf } from '../app.conf'
 
 export default class Api {
-  /**
-   * @param {string} url
-   */
-  constructor (url) {
-    this._url = url
-    this._token = conf.apptokenTMP
-  }
-
-  get token () {
-    return this._token
-  }
-
-  set token (value) {
-    this._token = value
+  constructor (singleId, token) {
+    this._apiUrl = conf.apiScheme + '://' + conf.apiHost + ':' + conf.apiPort
+    this._token = token
+    this._singleId = singleId
   }
 
   /**
    * @param {String} token
    * @returns {Promise}
    */
-  getProfileByToken (token) {
-    return fetch(this._url)
-      .then(response => {
-        if (token === this.token) {
-          return response.json()
-        } else {
-          return false
+  getStory = () => {
+    console.log(this._apiUrl + '/stories/' + this._token + '/' + this._singleId)
+    return fetch(this._apiUrl + '/stories/' + this._token + '/' + this._singleId)
+      .then(async response => {
+        const data = await response.json()
+
+        if (!response.ok) {
+          const error = (data && data.message) || response.status
+          return Promise.reject(error)
         }
+
+        if (data.status !== 'draft') {
+          const error = (data && data.message) || response.status
+          return Promise.reject(error)
+        }
+
+        return data
       })
       .catch(err => {
-        throw new Error('La requete api a échoué : ', err)
+        throw new Error('La requete get api a échoué : ', err)
       })
   }
 
@@ -39,15 +38,26 @@ export default class Api {
    * @param {Object} data
    * @returns {Response}
    */
-  sendFormStory (data) {
-    // Simulate Call API Post
-    return new Promise(function (resolve) {
-      if (!data.name) throw new Error()
-      setTimeout(resolve, 1000)
-    }).then(function () {
-      return { status: 200 }
-    }).catch(err => {
-      throw new Error('Erreur de l\'envois des données :', err)
-    })
+  sendFormStory = (data) => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }
+
+    return fetch(this._apiUrl + '/stories', requestOptions)
+      .then(async response => {
+        const data = await response.json()
+
+        if (!response.ok) {
+          const error = (data && data.error) || response.status
+          return Promise.reject(error)
+        }
+
+        return data
+      })
+      .catch(error => {
+        throw new Error(error)
+      })
   }
 }

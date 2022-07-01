@@ -21,8 +21,11 @@ const Alert = {
     if (Alert.wrapper) {
       Alert.wrapper.classList.add('hide')
       const timer = setTimeout(() => {
-        Alert.wrapper.remove()
-        Alert.wrapper = null
+        if (Alert.wrapper) {
+          Alert.wrapper.remove()
+          Alert.wrapper = null
+        }
+
         clearTimeout(timer)
       }, 150)
     }

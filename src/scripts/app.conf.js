@@ -1,10 +1,12 @@
 export const conf = {
-  apptokenTMP: '1234',
+  apiHost: process.env.API_HOST,
+  apiScheme: process.env.API_SCHEME,
+  apiPort: process.env.API_PORT,
 
   links: {
-    instagram: 'https://www.instagram.com/case_tes_potes',
-    facebook: 'https://www.facebook.com/CaseTesPotes',
-    appstore: '#',
-    playstore: '#'
+    instagram: process.env.LINK_INSTAGRAM,
+    facebook: process.env.LINK_FACEBOOK,
+    appstore: process.env.LINK_APPSTORE,
+    playstore: process.env.LINK_PLAYSTORE
   }
 }

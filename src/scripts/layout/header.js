@@ -36,6 +36,12 @@ const Header = {
     }, 600)
   },
   destroyBtnReturn: () => {
+    const returnBtn = document.querySelector('.fab-btn--return')
+
+    if (returnBtn) {
+      returnBtn.remove()
+    }
+
     if (Header.wrapper.querySelector('.fab-btn--return')) {
       const $node = Header.wrapper.querySelector('.fab-btn--return')
       $node.classList.remove('show')

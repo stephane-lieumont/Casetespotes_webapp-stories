@@ -1,4 +1,4 @@
-import Button from '../components/button'
+import Button from '../components/Button'
 import { router, routes, parseLocation, getRoute, getComponentByPath } from '../routes/router'
 
 const Thanks = {

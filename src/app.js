@@ -1,18 +1,19 @@
-import Header from './scripts/layout/header'
-import Footer from './scripts/layout/footer'
+import Header from './scripts/layout/Header'
+import Footer from './scripts/layout/Footer'
 
-import Avatar from './scripts/components/avatar'
-import Loader from './scripts/components/loader'
+import Avatar from './scripts/components/Avatar'
+import Loader from './scripts/components/Loader'
 
-import { getDataByUrl } from './scripts/app.utils'
 import { router } from './scripts/routes/router'
+import Api from './scripts/api/Api.class'
 
 /** ADD FAVICON ON HEADER PAGE */
 require('./assets/favicon/apple-touch-icon.png')
 require('./assets/favicon/favicon-16x16.png')
 require('./assets/favicon/favicon-32x32.png')
 
-let data
+export let apiPublic
+export let data
 
 /**
  * Initialize application
@@ -24,13 +25,23 @@ const initApp = async () => {
   $app.appendChild(document.createElement('main'))
   $app.appendChild(Loader.render())
   $app.appendChild(Footer.render())
-  data = await getDataByUrl()
+
+  const url = new URL(window.location.href)
+  const token = url.searchParams.get('token')
+  const singleId = url.searchParams.get('singleId')
+  apiPublic = new Api(singleId, token)
+
+  try {
+    data = await apiPublic.getStory()
+  } catch (error) {
+    data = null
+  }
 
   const timer = setTimeout(() => {
     Avatar.createAvatarSingle(data, () => {
-      Loader.destroyLoader()
+      document.querySelector('.animation-loader').remove()
+      app(apiPublic)
       clearTimeout(timer)
-      app()
     })
   }, 2500)
 }
@@ -40,7 +51,7 @@ const initApp = async () => {
  */
 const app = () => {
   // Route Paths
-  router(data)
+  router()
 }
 
 window.addEventListener('hashchange', app)

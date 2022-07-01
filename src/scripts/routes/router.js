@@ -1,12 +1,13 @@
-import Header from '../layout/header'
-import Alert from '../components/alert'
+import Header from '../layout/Header'
+import Alert from '../components/Alert'
 
-import EditTestimony from '../pages/editTestimony'
+import EditTestimony from '../pages/EditTestimony'
 import Error404 from '../pages/Error404'
-import ErrorLink from '../pages/errorLink'
-import Home from '../pages/home'
-import Thanks from '../pages/thanks'
+import ErrorLink from '../pages/ErrorLink'
+import Home from '../pages/Home'
+import Thanks from '../pages/Thanks'
 import TermsOfUse from '../pages/TermsOfUse'
+import { data } from '../../app'
 
 /**
  * Define routes with params
@@ -76,9 +77,8 @@ export const routes = [
 
 /**
  * Redirect to other routes
- * @param {ObjectJSON} data
  */
-export const router = (data = null) => {
+export const router = () => {
   // add name and parameters to Object component
   constructComponents(routes)
 

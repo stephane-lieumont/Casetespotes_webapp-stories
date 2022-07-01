@@ -1,20 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-
 import Header from '../../../scripts/layout/header'
 import EditTestimony from '../../../scripts/pages/editTestimony'
-import * as mockSingle from '../../__mocks__/single.mock.json'
+import * as mockStory from '../../__mocks__/story.mock.json'
 import { fireEvent, screen, waitFor } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
-import { sendDataStory } from '../../../scripts/app.utils'
 
 jest.mock('../../../scripts/store/store')
 jest.mock('lottie-web')
-jest.mock('../../../scripts/app.utils', () => {
-  return {
-    sendDataStory: jest.fn()
-  }
-})
 
 describe('Given call UI Edit Testimony page', () => {
   describe('When i call Edit Testimony page', () => {
@@ -29,7 +20,7 @@ describe('Given call UI Edit Testimony page', () => {
       spyEventListenersPopup = jest.spyOn(EditTestimony, 'eventListenerPopup')
     })
     test('then i can render it with eventListeners', () => {
-      renderPageComponent(mockSingle)
+      renderPageComponent(mockStory)
 
       expect(renderPageComponent).toBeCalledTimes(1)
       expect(spyEventListeners).toHaveBeenCalledTimes(1)
@@ -50,7 +41,7 @@ describe('Given call UI Edit Testimony page on html document', () => {
   let handleSendForm
   let spySendHideAlert
   let spyValidateForm
-  let inputName
+  let inputEmail
   let inputStory
   let handleInputName
   let handleInputStory
@@ -63,20 +54,20 @@ describe('Given call UI Edit Testimony page on html document', () => {
 
     document.body.innerHTML = ''
     document.body.append(Header.render())
-    document.body.append(EditTestimony.wrapper)
+    document.body.append(EditTestimony.render(mockStory))
 
     form = screen.getByTestId('form')
     submitButton = screen.getByTestId('submit')
-    inputName = screen.getByTestId('input-name')
+    inputEmail = screen.getByTestId('input-email')
     inputStory = screen.getByTestId('input-story')
     handleSendForm = jest.fn(EditTestimony.sendForm)
-    handleInputName = jest.fn(EditTestimony.changeInputName)
+    handleInputEmail = jest.fn(EditTestimony.changeInputEmail)
     handleInputStory = jest.fn(EditTestimony.changeInputStory)
     handleInputStoryMaxLenght = jest.fn(EditTestimony.stopEditable)
     handleDestroyPopup = jest.fn(EditTestimony.destroyPopup)
 
     submitButton.addEventListener('click', handleSendForm)
-    inputName.addEventListener('change', handleInputName)
+    inputEmail.addEventListener('change', handleInputEmail)
     inputStory.addEventListener('change', handleInputStory)
     inputStory.addEventListener('keydown', handleInputStoryMaxLenght)
   })
@@ -100,24 +91,20 @@ describe('Given call UI Edit Testimony page on html document', () => {
 
   describe('When i send form with only input name completed', () => {
     test('Then it should appear alert message', async () => {
-      fireEvent.change(inputName, { target: { value: 'stephane' } })
+      fireEvent.change(inputEmail, { target: { value: 'test@gmail.com' } })
       userEvent.click(submitButton)
 
       const alert = await waitFor(() => screen.getByTestId('alert'))
       expect(alert).toBeTruthy()
       expect(alert.innerHTML).not.toContain('<br>') // 1 error on popup alert not <br>
 
-      expect(inputName.value).toBe('stephane')
+      expect(inputEmail.value).toBe('test@gmail.com')
       expect(handleSendForm).toBeCalledTimes(1)
       expect(spyValidateForm).toHaveBeenCalled()
     })
   })
 
   describe('When i send form with all input completed', () => {
-    beforeAll(() => {
-      sendDataStory.mockResolvedValueOnce({ status: 404 }).mockResolvedValueOnce({ status: 200 })
-    })
-
     test('Then it should not appear alert message', async () => {
       EditTestimony.inputMaxLength = 100 // MaxLenght 100 Caracters
       fireEvent.change(inputStory, { target: { value: 'test de la story' } })
@@ -132,27 +119,23 @@ describe('Given call UI Edit Testimony page on html document', () => {
 
       expect(handleInputStoryMaxLenght).toHaveReturnedWith(false)
 
+      fireEvent.change(inputStory, { target: { value: 'test de la story minimum 30 characters inside input to be validate' } })
+
       userEvent.click(submitButton)
 
-      // When ppup desappear, there ar fadout animation
+      // When popup desappear, there ar fadout animation
       const timer = setTimeout(() => {
         const alert = screen.getByTestId('alert')
         expect(alert).not.toBeTruthy()
         clearTimeout(timer)
       }, 500)
 
-      expect(inputName.value).toBe('stephane')
-      expect(inputStory.value).toBe('test de la story')
+      expect(inputEmail.value).toBe('test@gmail.com')
+      expect(inputStory.value).toBe('test de la story minimum 30 characters inside input to be validate')
       expect(handleSendForm).toBeCalledTimes(1)
       expect(spyValidateForm).toHaveBeenCalled()
-    })
 
-    test('Then popup validation appear', async () => {
-      const popup = await waitFor(() => screen.getByTestId('popup'))
-      expect(popup).toBeTruthy()
-
-      handleDestroyPopup()
-      expect(handleDestroyPopup).toBeCalled()
+      EditTestimony.destroyPopup()
     })
   })
 })
