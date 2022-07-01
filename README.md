@@ -26,22 +26,41 @@ npm run prod
 ```
 
 ## Route local
-``localhost/?t=1234``  
-``localhost/?t=1234#/edition-temoignage``  
-``localhost/?t=1234#/temoignage-enregistre``  
-``localhost/?t=1234#/invitation-incorrecte``  
+``localhost/?token=:token&singleId=:singleId``  
+``localhost/?token=:token&singleId=:singleId#/edition-temoignage``  
+``localhost/?token=:token&singleId=:singleId#/temoignage-enregistre``  
+``localhost/?token=:token&singleId=:singleId#/invitation-incorrecte``  
 
 ## Configuration
-The `src/scripts/app.conf.js` file is used to change certain elements of the application
-```javascript
-export const conf = {
-  apptokenTMP: '1234',
+Create `.env` file to configure application.
 
-  links: {
-    instagram: 'https://www.instagram.com/case_tes_potes',
-    facebook: 'https://www.facebook.com/CaseTesPotes',
-    appstore: '#',
-    playstore: '#'
-  }
+```javascript
+// .env.sample for example
+API_HOST= "192.168.1.2"
+API_SCHEME= "http"
+API_PORT= "8090"
+LINK_INSTAGRAM= "https=//www.instagram.com/case_tes_potes",
+LINK_FACEBOOK= "https=//www.facebook.com/CaseTesPotes",
+LINK_APPSTORE= "#"
+LINK_PLAYSTORE= "#"
+```
+
+## Configuration
+modify nginx config for image prod `.nginx.conf`.
+
+```javascript
+// nginx/nginx.conf
+server {
+    listen 80;
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+        try_files $uri /index.html;               
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
 }
 ```
