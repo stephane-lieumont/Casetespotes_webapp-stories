@@ -28,8 +28,8 @@ const Avatar = {
 
       // Load Avatar Image
       const downloadingImage = new Image()
-      if (data.picture != null) {
-        downloadingImage.src = data.picture
+      if (data.singlePicture != null) {
+        downloadingImage.src = data.singlePicture
       } else {
         downloadingImage.src = 'https://us.123rf.com/450wm/kritchanut/kritchanut1406/kritchanut140600093/29213195-homme-photo-de-profil-silhouette-avatar.jpg?ver=6'
       }
