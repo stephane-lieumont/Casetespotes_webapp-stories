@@ -28,7 +28,7 @@ const EditTestimony = {
 
     const content = `
       <div class="container__content">
-        <h2>Décrivez votre amie ${data.firstname}</h2>
+        <h2>Décrivez votre amie ${data.singleFirstname}</h2>
         <p class="container--small">Quelles sont ses préférences, ses qualités, une petite anecdote…<br /> La description sera ensuite envoyée à Julie qui décidera de l’afficher sur son profil.</p>
         <form class="form-control" data-testid="form">
           <div class="form-control__input">
@@ -84,7 +84,7 @@ const EditTestimony = {
 
   renderPopup: () => {
     if (!document.querySelector('.popup')) {
-      Popup.title = `Ton témoignage  a été envoyé à ${Popup.data.firstname}!`
+      Popup.title = `Ton témoignage  a été envoyé à ${Popup.data.singleFirstname}!`
       Popup.content = 'Connaitrais tu un(e) pote célib qui aurait besoin de coup de main pour trouver l’âme sœur ?'
       Popup.buttons = [Button.blue.render('En savoir plus', 'thanks', 'close')]
       Popup.animation = popupAnimation

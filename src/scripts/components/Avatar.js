@@ -24,7 +24,7 @@ const Avatar = {
     if (data) {
       const $node = document.createElement('div')
       $node.classList.add('avatar')
-      $node.alt = data.firstname + ' picture'
+      $node.alt = data.singleFirstname + ' picture'
 
       // Load Avatar Image
       const downloadingImage = new Image()
