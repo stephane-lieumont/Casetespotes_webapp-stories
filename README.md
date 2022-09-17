@@ -31,7 +31,7 @@ npm run prod
 ``localhost/?token=:token&singleId=:singleId#/temoignage-enregistre``  
 ``localhost/?token=:token&singleId=:singleId#/invitation-incorrecte``  
 
-## Configuration
+## Configuration App
 Create `.env` file to configure application.
 
 ```javascript
@@ -45,7 +45,7 @@ LINK_APPSTORE= "#"
 LINK_PLAYSTORE= "#"
 ```
 
-## Configuration
+## Configuration Server
 modify nginx config for image prod `.nginx.conf`.
 
 ```javascript
