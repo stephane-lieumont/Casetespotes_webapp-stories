@@ -153,7 +153,7 @@ const EditTestimony = {
     // Check inputs value length
 
     if (dataSubmit.email.length < 3) errorList.push({ error: 'Veuillez saisir le champs email', input: inputEmail })
-    if (dataSubmit.content.length < 30) errorList.push({ error: 'Veuillez rédiger votre témoignage', input: inputStory })
+    if (dataSubmit.content.length < 30) errorList.push({ error: 'Veuillez rédiger votre témoignage<br />minimum de 30 charactères', input: inputStory })
     if (!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(dataSubmit.email.toLowerCase())) {
       errorList.push({ error: 'Veuillez saisir un email valide', input: inputEmail })
     }
@@ -183,7 +183,7 @@ const EditTestimony = {
 
     if (EditTestimony.validateForm(dataSubmit)) {
       try {
-        await apiPublic.sendFormStory(dataSubmit)
+        await apiPublic.sendFormStoryMock(dataSubmit)
         EditTestimony.renderPopup()
       } catch (e) {
         if (e.toString().includes('Wrong hash')) {

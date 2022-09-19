@@ -74,6 +74,19 @@ body {
   height: 100vh;
 }
 
+.demo-banner {
+  position: absolute;
+  top:0;
+  right: 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  padding: 10px 100px;
+  color: white;
+  font-weight: 700;
+  transform: translate(80px, 50%) rotate(45deg);
+  z-index: 999;
+  opacity: 0.5;
+}
+
 @media (max-width: $media-query-mobile) {
   #app{
     max-height: 93vh;

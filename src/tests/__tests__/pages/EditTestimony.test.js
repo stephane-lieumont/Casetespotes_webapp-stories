@@ -96,7 +96,7 @@ describe('Given call UI Edit Testimony page on html document', () => {
 
       const alert = await waitFor(() => screen.getByTestId('alert'))
       expect(alert).toBeTruthy()
-      expect(alert.innerHTML).not.toContain('<br>') // 1 error on popup alert not <br>
+      expect(alert.innerHTML).toContain('<br>') // 1 error on popup alert not <br>
 
       expect(inputEmail.value).toBe('test@gmail.com')
       expect(handleSendForm).toBeCalledTimes(1)

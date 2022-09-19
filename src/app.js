@@ -32,7 +32,8 @@ const initApp = async () => {
   apiPublic = new Api(singleId, token)
 
   try {
-    data = await apiPublic.getStory()
+    data = await apiPublic.getStoryMock()
+    console.log(data)
   } catch (error) {
     data = null
   }
