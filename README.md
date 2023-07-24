@@ -43,6 +43,7 @@ LINK_INSTAGRAM= "https=//www.instagram.com/case_tes_potes",
 LINK_FACEBOOK= "https=//www.facebook.com/CaseTesPotes",
 LINK_APPSTORE= "#"
 LINK_PLAYSTORE= "#"
+DEMO= false
 ```
 
 ## Configuration Server

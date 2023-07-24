@@ -160,7 +160,7 @@ const renderComponent = (component, data) => {
   document.querySelector('#app').replaceChild(component.render(data), document.querySelector('#app main'))
 
   // Transition heigth main component
-  const newHeigthContainer = document.querySelector('#app main').clientHeight + 25
+  const newHeigthContainer = document.querySelector('#app main').clientHeight
 
   // Destroy alert forms
   Alert.destroyAlert()
@@ -168,7 +168,7 @@ const renderComponent = (component, data) => {
   document.querySelector('#app main').style.height = oldHeigthContainer + 'px'
   setTimeout(() => {
     document.querySelector('#app main').style.height = newHeigthContainer + 'px'
-  }, 100)
+  }, 50)
 }
 
 /**

@@ -4,6 +4,7 @@
   justify-content: start;
   align-items: center;
   padding:0 space(0.5);
+  overflow: hidden;
 
   &__content {
     max-width: $container-large;

@@ -1,15 +1,9 @@
 main {
   width: 100%;
-  margin:space(1);
-  margin-top:0;
-  margin-bottom: space(2.5);
   opacity: 1;
-  min-height: 150px;
   transition: height .3s ease-in-out!important;
-  overflow-x: hidden;
-  overflow-y: auto;
-  min-width: 320px;
-  animation: fadein-content .5s ease-in .3s both;  
+  animation: fadein-content .5s ease-in .3s both;
+  min-height: 100px;
 
   &.load {
     opacity: 0;
@@ -29,9 +23,7 @@ main {
 
 @media (max-width: $media-query-mobile) {
   main{
-    min-width: 200px;
     font-size: 0.8rem;
     margin:0;
-    margin-bottom: space(3);
   }
 }

@@ -5,8 +5,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin') // Clean derector
 const HtmlWebpackPlugin = require('html-webpack-plugin') // Inject les liens dynamique des fichier hashé
 const ESLintPlugin = require('eslint-webpack-plugin') // ESlint
 const Dotenv = require('dotenv-webpack') // ENV
+require('dotenv').config()
 
 const path = require('path')
+const publicPath = process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}/` : './'
 
 // Verification de l'environnement de developpement
 const dev = process.env.NODE_ENV === 'development'
@@ -19,6 +21,7 @@ const config = {
 
   output: {
     path: path.resolve(__dirname, 'public'),
+    publicPath: publicPath,
     filename: dev ? 'js/app.js' : 'js/app_[chunkhash:8].js'
   },
 
@@ -76,7 +79,7 @@ const config = {
   },
 
   plugins: [
-    new Dotenv(),
+    new Dotenv({ systemvars: true }),
     new CleanWebpackPlugin({
       dry: false, // tester la configuration "true" avant de clean
       cleanStaleWebpackAssets: false,
@@ -92,6 +95,7 @@ const config = {
     new HtmlWebpackPlugin({
       inject: false,
       template: 'src/index.ejs',
+      publicPath: publicPath,
       favicons: {
         android512: 'assets/android-chrome-512x512.png',
         android192: 'assets/android-chrome-192x192.png',

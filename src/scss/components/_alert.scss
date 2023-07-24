@@ -1,16 +1,18 @@
 .alert {
-  position: absolute;
-  top:50%;
+  position: fixed;
+  top:0;
   left:50%;
-  transform: translate(-50%, -50%);
   font-size: 0.9rem;
   padding: space(0.3) space(1.6);
   background: $yellow;
   color: white;
+  font-weight: 400;
   border-radius: 20px;
   opacity: 0;
   animation: show-alert .15s ease-in-out forwards;
   text-align: center;
+  backdrop-filter: blur(20px);
+  z-index: 999;
 
   p {
     margin:0;
@@ -38,24 +40,24 @@
 @keyframes show-alert {
   0% {
     opacity: 0;
-    transform: translate(-50%, 15px);
+    transform: translate(-50%, 100%);
   }
 
   100% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%);
+    opacity: 1;
+    transform: translate(-50%, 50%);
   }
 }
 
 @keyframes hide-alert {
   0% {
     opacity: 0.8;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 50%);
   }
 
   100% {
     opacity: 0;
-    transform: translate(-50%, 15px);
+    transform: translate(-50%, 100%);
   }
 }
 

@@ -6,6 +6,8 @@ import Loader from './scripts/components/Loader'
 
 import { router } from './scripts/routes/router'
 import Api from './scripts/api/Api.class'
+import { conf } from './scripts/app.conf'
+import Demo from './scripts/components/Demo'
 
 /** ADD FAVICON ON HEADER PAGE */
 require('./assets/favicon/apple-touch-icon.png')
@@ -19,7 +21,13 @@ export let data
  * Initialize application
  */
 const initApp = async () => {
+  console.log('DEMO :', conf.demo)
+  console.log('DEMO process :', process.env.DEMO)
+
+  const $body = document.querySelector('body')
   const $app = document.querySelector('#app')
+
+  if (conf.demo) $body.prepend(Demo.render())
 
   $app.prepend(Header.render())
   $app.appendChild(document.createElement('main'))
@@ -31,10 +39,14 @@ const initApp = async () => {
   const singleId = url.searchParams.get('singleId')
   apiPublic = new Api(singleId, token)
 
-  try {
-    data = await apiPublic.getStory()
-  } catch (error) {
-    data = null
+  if (conf.demo) {
+    data = await apiPublic.getStoryMock()
+  } else {
+    try {
+      data = await apiPublic.getStory()
+    } catch (error) {
+      data = null
+    }
   }
 
   const timer = setTimeout(() => {

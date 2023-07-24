@@ -1,4 +1,5 @@
 import { conf } from '../app.conf'
+import { singleData } from '../../data/single'
 
 export default class Api {
   constructor (singleId, token) {
@@ -12,7 +13,6 @@ export default class Api {
    * @returns {Promise}
    */
   getStory = () => {
-    console.log(this._apiUrl + '/stories/' + this._token + '/' + this._singleId)
     return fetch(this._apiUrl + '/stories/' + this._token + '/' + this._singleId)
       .then(async response => {
         const data = await response.json()
@@ -32,6 +32,12 @@ export default class Api {
       .catch(err => {
         throw new Error('La requete get api a échoué : ', err)
       })
+  }
+
+  getStoryMock = () => {
+    const delay = 1000
+
+    return new Promise(resolve => setTimeout(resolve, delay, singleData))
   }
 
   /**
@@ -59,5 +65,10 @@ export default class Api {
       .catch(error => {
         throw new Error(error)
       })
+  }
+
+  sendFormStoryMock = (data) => {
+    const delay = 1000
+    return new Promise(resolve => setTimeout(resolve, delay, data))
   }
 }

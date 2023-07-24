@@ -1,0 +1,25 @@
+.demo-banner {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  color: white;  
+  z-index: 999;
+  font-weight: 700;
+  text-transform: uppercase;
+  overflow: hidden;
+  height: 150px;
+  width: 150px;
+
+  &__container {
+    pointer-events: none;
+    background: rgba(0,0,0,0.3);
+    padding: 10px 100px;
+    transform: rotate(45deg);
+    p {
+      pointer-events: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

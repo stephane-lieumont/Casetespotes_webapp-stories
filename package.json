@@ -1,12 +1,14 @@
 {
   "name": "case_tes_potes",
   "version": "1.0.0",
+  "homepage": "/",
   "description": "web app case tes potes: témoignages utilisateurs",
   "scripts": {
     "prod": "env NODE_ENV=production webpack",
     "dev": "env NODE_ENV=development webpack",
     "test": "jest",
-    "test:coverage": "jest --watchAll --coverage"
+    "test:coverage": "jest --watchAll --coverage",
+    "lint": "eslint \"src/**/*.js\""
   },
   "author": "Stéphane LIEUMONT",
   "license": "ISC",
