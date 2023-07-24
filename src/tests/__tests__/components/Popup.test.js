@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-import Popup from '../../../scripts/components/popup'
-import Button from '../../../scripts/components/button'
+import Popup from '../../../scripts/components/Popup'
+import Button from '../../../scripts/components/Button'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')

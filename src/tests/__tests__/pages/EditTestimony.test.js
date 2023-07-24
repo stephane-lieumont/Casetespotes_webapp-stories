@@ -1,5 +1,6 @@
-import Header from '../../../scripts/layout/header'
-import EditTestimony from '../../../scripts/pages/editTestimony'
+/* eslint-disable no-undef */
+import Header from '../../../scripts/layout/Header'
+import EditTestimony from '../../../scripts/pages/EditTestimony'
 import * as mockStory from '../../__mocks__/story.mock.json'
 import { fireEvent, screen, waitFor } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
@@ -39,14 +40,11 @@ describe('Given call UI Edit Testimony page on html document', () => {
   let form
   let submitButton
   let handleSendForm
-  let spySendHideAlert
   let spyValidateForm
   let inputEmail
   let inputStory
-  let handleInputName
   let handleInputStory
   let handleInputStoryMaxLenght
-  let handleDestroyPopup
 
   beforeAll(() => {
     spySendHideAlert = jest.spyOn(EditTestimony, 'hideAlert')

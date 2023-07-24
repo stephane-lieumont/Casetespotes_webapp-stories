@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-
-import Alert from '../../../scripts/components/alert'
+import Alert from '../../../scripts/components/Alert'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')

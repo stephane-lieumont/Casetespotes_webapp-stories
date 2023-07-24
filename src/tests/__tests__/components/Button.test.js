@@ -1,7 +1,5 @@
-/* eslint-disable import/first */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import Button from '../../../scripts/components/button'
+import Button from '../../../scripts/components/Button'
 import * as router from '../../../scripts/routes/router'
 
 jest.mock('../../../scripts/routes/router')

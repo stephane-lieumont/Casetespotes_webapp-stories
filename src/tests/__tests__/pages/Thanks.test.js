@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-import Header from '../../../scripts/layout/header'
-import Footer from '../../../scripts/layout/footer'
+import Header from '../../../scripts/layout/Header'
+import Footer from '../../../scripts/layout/Footer'
 import Thanks from '../../../scripts/pages/Thanks'
 import { getRoute } from '../../../scripts/routes/router'
 import { screen } from '@testing-library/dom'

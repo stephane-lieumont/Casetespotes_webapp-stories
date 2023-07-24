@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-
 import Home from '../../../scripts/pages/Home'
 import { screen } from '@testing-library/dom'
 import * as mockSingle from '../../__mocks__/single.mock.json'

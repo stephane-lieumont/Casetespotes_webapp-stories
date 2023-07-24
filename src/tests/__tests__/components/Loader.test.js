@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-import Loader from '../../../scripts/components/loader'
+import Loader from '../../../scripts/components/Loader'
 import lottie from 'lottie-web'
 
 jest.mock('lottie-web')

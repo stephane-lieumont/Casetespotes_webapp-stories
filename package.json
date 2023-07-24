@@ -1,11 +1,12 @@
 {
   "name": "case_tes_potes",
   "version": "1.0.0",
-  "description": "algorithme de recherche sur un ensembles de recettes",
+  "description": "web app case tes potes: témoignages utilisateurs",
   "scripts": {
     "prod": "env NODE_ENV=production webpack",
     "dev": "env NODE_ENV=development webpack",
-    "test": "jest --watchAll --coverage"
+    "test": "jest",
+    "test:coverage": "jest --watchAll --coverage"
   },
   "author": "Stéphane LIEUMONT",
   "license": "ISC",
@@ -14,9 +15,9 @@
     "@babel/plugin-transform-runtime": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@testing-library/dom": "^8.11.3",
-    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^13.5.0",
-    "autoprefixer": "^10.4.1",
+    "autoprefixer": "10.4.5",
     "babel-jest": "^27.5.0",
     "babel-loader": "^8.2.3",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -34,7 +35,6 @@
     "isomorphic-fetch": "^3.0.0",
     "jest": "^27.5.0",
     "jest-canvas-mock": "^2.3.1",
-    "jest-dom": "^4.0.0",
     "jest-environment-jsdom": "^27.5.0",
     "jest-fetch-mock": "^3.0.3",
     "jest-html-reporter": "^3.4.2",
@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
+    "eslint": "^8.45.0",
     "lottie-web": "^5.8.1",
     "ts-jest": "^27.1.3"
   }

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-import Avatar from '../../../scripts/components/avatar'
+import Avatar from '../../../scripts/components/Avatar'
 import mockSingle from '../../__mocks__/single.mock.json'
 
 describe('Given call UI avatar', () => {

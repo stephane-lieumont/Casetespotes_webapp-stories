@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-import Header from '../../../scripts/layout/header'
+import Header from '../../../scripts/layout/Header'
 import userEvent from '@testing-library/user-event'
 
 jest.useFakeTimers()
