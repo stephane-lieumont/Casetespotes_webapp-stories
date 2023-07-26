@@ -21,9 +21,6 @@ export let data
  * Initialize application
  */
 const initApp = async () => {
-  console.log('DEMO :', conf.demo)
-  console.log('DEMO process :', process.env.DEMO)
-
   const $body = document.querySelector('body')
   const $app = document.querySelector('#app')
 
