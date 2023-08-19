@@ -1,8 +1,10 @@
-name: CI / Build docker image
+name: CI
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_call:
+    secrets:
+      GH_TOKEN:
+        required: true
   pull_request:
     branches: [ "main" ]
 
@@ -15,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: yarn
     - name: Run linter
-      run: yarn lint
+      run: yarn ci
     - name: Run unit tests
       run: yarn test
 

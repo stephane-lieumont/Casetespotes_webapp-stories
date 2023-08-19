@@ -8,7 +8,11 @@
     "dev": "env NODE_ENV=development webpack",
     "test": "jest",
     "test:coverage": "jest --watchAll --coverage",
-    "lint": "eslint \"src/**/*.js\""
+    "lint": "eslint \"src/**/*.js\"",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier -l .",
+    "typecheck": "tsc --noEmit",
+    "ci": "yarn typecheck && yarn lint && yarn prettier:check"
   },
   "author": "Stéphane LIEUMONT",
   "license": "ISC",
