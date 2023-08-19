@@ -8,10 +8,10 @@ const Avatar = {
    */
   render: (data, container) => {
     if (Avatar.wrapper) {
-      container.classList.remove('load')
-      return Avatar.wrapper
+      container.classList.remove('load');
+      return Avatar.wrapper;
     } else {
-      return Avatar.createAvatarSingle(data, Avatar.removeLoad(container))
+      return Avatar.createAvatarSingle(data, Avatar.removeLoad(container));
     }
   },
   /**
@@ -22,32 +22,33 @@ const Avatar = {
    */
   createAvatarSingle: (data, callback) => {
     if (data) {
-      const $node = document.createElement('div')
-      $node.classList.add('avatar')
-      $node.alt = data.singleFirstname + ' picture'
+      const $node = document.createElement('div');
+      $node.classList.add('avatar');
+      $node.alt = data.singleFirstname + ' picture';
 
       // Load Avatar Image
-      const downloadingImage = new Image()
+      const downloadingImage = new Image();
       if (data.singlePicture != null) {
-        downloadingImage.src = data.singlePicture
+        downloadingImage.src = data.singlePicture;
       } else {
-        downloadingImage.src = 'https://us.123rf.com/450wm/kritchanut/kritchanut1406/kritchanut140600093/29213195-homme-photo-de-profil-silhouette-avatar.jpg?ver=6'
+        downloadingImage.src =
+          'https://us.123rf.com/450wm/kritchanut/kritchanut1406/kritchanut140600093/29213195-homme-photo-de-profil-silhouette-avatar.jpg?ver=6';
       }
-      downloadingImage.onload = callback
+      downloadingImage.onload = callback;
 
-      $node.appendChild(downloadingImage)
-      Avatar.wrapper = $node
+      $node.appendChild(downloadingImage);
+      Avatar.wrapper = $node;
 
-      return $node
+      return $node;
     } else {
-      callback()
-      return null
+      callback();
+      return null;
     }
   },
 
   removeLoad: (container) => {
-    container.classList.remove('load')
-  }
-}
+    container.classList.remove('load');
+  },
+};
 
-export default Avatar
+export default Avatar;

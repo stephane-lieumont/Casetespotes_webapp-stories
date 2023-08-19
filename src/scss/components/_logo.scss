@@ -1,10 +1,10 @@
 .logo {
-  position:absolute;
+  position: absolute;
   left: 50%;
-  width:254px;
+  width: 254px;
   opacity: 0;
-  animation: logo-fadein .6s ease-in-out .3s both;
-  transition: all .3s ease-in-out .15s;
+  animation: logo-fadein 0.6s ease-in-out 0.3s both;
+  transition: all 0.3s ease-in-out 0.15s;
   transform: translateX(-50%) scale(1);
   cursor: pointer;
 
@@ -24,12 +24,10 @@
   }
 }
 
-
-
-@media (max-width: $media-query-mobile) { 
-  .logo{
+@media (max-width: $media-query-mobile) {
+  .logo {
     transform: translateX(-50%) scale(0.8);
-    &--low{
+    &--low {
       left: 50%;
       transform: translateX(-50%) scale(0.65);
     }
@@ -37,9 +35,9 @@
 }
 
 @media (max-width: $media-query-mobile-fold) {
-  .logo{
+  .logo {
     transform: translateX(-50%) scale(0.6);
-    &--low{
+    &--low {
       left: 50%;
       transform: translateX(-50%) scale(0.4);
     }

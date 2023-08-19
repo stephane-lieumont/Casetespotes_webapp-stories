@@ -1,4 +1,3 @@
-
 const TermsOfUse = {
   wrapper: null,
   /**
@@ -6,8 +5,8 @@ const TermsOfUse = {
    * @returns {HTMLElement}
    */
   render: () => {
-    const $node = document.createElement('main')
-    $node.classList.add('container--medium')
+    const $node = document.createElement('main');
+    $node.classList.add('container--medium');
 
     const content = `
       <div class="terms-of-use" data-testid="term-of-rules">
@@ -50,12 +49,12 @@ const TermsOfUse = {
           Nullam finibus urna rutrum turpis venenatis sodales.
         </p>
       </div>
-    `
-    $node.innerHTML = content
-    TermsOfUse.wrapper = $node
+    `;
+    $node.innerHTML = content;
+    TermsOfUse.wrapper = $node;
 
-    return $node
-  }
-}
+    return $node;
+  },
+};
 
-export default TermsOfUse
+export default TermsOfUse;

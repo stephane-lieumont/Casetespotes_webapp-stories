@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding:0 space(0.5);
+  padding: 0 space(0.5);
   overflow: hidden;
 
   &__content {
@@ -22,7 +22,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom:space(0.5);
+    margin-bottom: space(0.5);
 
     &__item {
       flex-grow: 1;
@@ -37,20 +37,20 @@
 
   &--small {
     max-width: $container-small;
-    margin-left:auto!important;
-    margin-right:auto!important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   &--medium {
     max-width: $container-medium;
-    margin-left:auto!important;
-    margin-right:auto!important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   &--large {
     max-width: $container-medium;
-    margin-left:auto!important;
-    margin-right:auto!important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 
@@ -60,7 +60,7 @@
       padding: 0 space(1);
       p {
         text-align: left;
-      }      
+      }
     }
   }
 }

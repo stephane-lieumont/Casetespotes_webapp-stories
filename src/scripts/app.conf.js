@@ -8,6 +8,6 @@ export const conf = {
     instagram: process.env.LINK_INSTAGRAM,
     facebook: process.env.LINK_FACEBOOK,
     appstore: process.env.LINK_APPSTORE,
-    playstore: process.env.LINK_PLAYSTORE
-  }
-}
+    playstore: process.env.LINK_PLAYSTORE,
+  },
+};

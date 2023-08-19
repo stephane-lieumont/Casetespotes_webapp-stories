@@ -6,12 +6,12 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    opacity: .5;
+    opacity: 0.5;
     gap: space(0.2);
   }
 
   a {
-    color:$primary;
+    color: $primary;
     white-space: nowrap;
     &:hover {
       text-decoration: none;

@@ -1,5 +1,5 @@
-import lottie from 'lottie-web'
-import loaderAnimation from '../../assets/lottie/lottieLoader.json'
+import lottie from 'lottie-web';
+import loaderAnimation from '../../assets/lottie/lottieLoader.json';
 
 const Loader = {
   wrapper: null,
@@ -16,36 +16,36 @@ const Loader = {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: loaderAnimation
-    })
+      path: loaderAnimation,
+    });
   },
   /**
    * Delete Loader
    */
-  destroyLoader () {
-    Loader.lottieObject.destroy()
-    Loader.wrapper.remove()
+  destroyLoader() {
+    Loader.lottieObject.destroy();
+    Loader.wrapper.remove();
   },
   /**
    * Render component
    * @returns {HTMLElement}
    */
   render: () => {
-    const $node = document.createElement('div')
-    $node.classList.add('animation-loader')
-    $node.innerHTML = '<div class="animation-loader__lottie"></div>'
+    const $node = document.createElement('div');
+    $node.classList.add('animation-loader');
+    $node.innerHTML = '<div class="animation-loader__lottie"></div>';
 
     Object.defineProperty(Loader, 'wrapper', {
       value: $node.querySelector('.animation-loader__lottie'),
-      writable: false
-    })
+      writable: false,
+    });
     Object.defineProperty(Loader, 'lottieObject', {
       value: Loader.createLoader(Loader.wrapper),
-      writable: false
-    })
+      writable: false,
+    });
 
-    return $node
-  }
-}
+    return $node;
+  },
+};
 
-export default Loader
+export default Loader;

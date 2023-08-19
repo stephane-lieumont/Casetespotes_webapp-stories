@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 
-import Footer from '../../../scripts/layout/Footer'
+/* eslint-disable no-undef */
+import Footer from '../../../scripts/layout/Footer';
 
 describe('Given call UI Footer', () => {
   describe('When i call Footer', () => {
-    let renderLayoutComponent
+    let renderLayoutComponent;
     beforeAll(() => {
-      renderLayoutComponent = jest.fn(Footer.render)
-    })
+      renderLayoutComponent = jest.fn(Footer.render);
+    });
     test('then i can render it', () => {
-      renderLayoutComponent()
+      renderLayoutComponent();
 
-      expect(renderLayoutComponent).toBeCalledTimes(1)
-    })
-  })
-})
+      expect(renderLayoutComponent).toBeCalledTimes(1);
+    });
+  });
+});

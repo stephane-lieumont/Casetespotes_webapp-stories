@@ -26,10 +26,7 @@ module.exports = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: [
-    'node_modules/',
-    'src/app.js'
-  ],
+  coveragePathIgnorePatterns: ['node_modules/', 'src/app.js'],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
@@ -72,15 +69,12 @@ module.exports = {
   // ],
 
   // An array of file extensions your modules use
-  moduleFileExtensions: [
-    'js',
-    'jsx'
-  ],
+  moduleFileExtensions: ['js', 'jsx'],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '^.+\\.svg$': 'jest-transform-stub',
-    '^.+\\.png$': 'jest-transform-stub'
+    '^.+\\.png$': 'jest-transform-stub',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -117,9 +111,7 @@ module.exports = {
   // rootDir: '',
 
   // A list of paths to directories that Jest should use to search for files in
-  roots: [
-    'src/tests/__tests__/'
-  ],
+  roots: ['src/tests/__tests__/'],
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
@@ -146,9 +138,7 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: [
-    '**/?(*.)+(spec|test).[tj]s?(x)'
-  ],
+  testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -173,10 +163,9 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
     '^.+\\.(js)$': 'babel-jest',
     '^.+\\.jsx?$': 'babel-jest',
-    '^.+.(svg)$': 'jest-transform-stub'
+    '^.+.(svg)$': 'jest-transform-stub',
   },
-  transformIgnorePatterns: [
-  ]
+  transformIgnorePatterns: [],
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
   //   "\\\\node_modules\\\\",
@@ -194,4 +183,4 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-}
+};

@@ -7,6 +7,6 @@ export const conf = {
     instagram: '#',
     facebook: '#',
     appstore: '#',
-    playstore: '#'
-  }
-}
+    playstore: '#',
+  },
+};
