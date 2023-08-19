@@ -4,8 +4,8 @@
 const Store = {
   formEditStory: {
     inputEmail: '',
-    inputStory: ''
-  }
-}
+    inputStory: '',
+  },
+};
 
-export default Store
+export default Store;

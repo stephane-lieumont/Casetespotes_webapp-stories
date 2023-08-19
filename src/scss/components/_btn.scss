@@ -1,19 +1,19 @@
 .btn {
   position: relative;
-  display:block;
+  display: block;
   align-items: center;
   background-color: $secondary;
   min-height: 50px;
   min-width: 200px;
   border-radius: 7px;
-  margin:space(0.2);
-  padding:space(0.3) space(0.5);
-  text-decoration: none!important;
-  color:white!important;
+  margin: space(0.2);
+  padding: space(0.3) space(0.5);
+  text-decoration: none !important;
+  color: white !important;
   overflow: hidden;
   box-shadow: $shadow-medium;
   white-space: nowrap;
-  border:none;
+  border: none;
   outline: 0;
   cursor: pointer;
   font-weight: $font-bold;
@@ -23,7 +23,7 @@
 
   strong {
     font-size: 2rem;
-    color:white!important;
+    color: white !important;
     letter-spacing: 1px;
   }
 
@@ -37,56 +37,56 @@
 
   &--yellow {
     background-color: $yellow;
-    color: $secondary!important;
+    color: $secondary !important;
   }
 
   &--load {
     pointer-events: none;
     &::after {
-      opacity: .5!important;
+      opacity: 0.5 !important;
     }
     &::before {
-      background-image: url('../assets/spinner.svg')!important;
-    }    
+      background-image: url('../assets/spinner.svg') !important;
+    }
   }
 
   &__icon {
-    display:flex;
+    display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
-    padding:space(0.2) space(0.7);
+    padding: space(0.2) space(0.7);
 
     &::before {
       content: '';
-      width: 30px!important;
-      align-self: flex-end;      
-      margin-left: space(1)!important;
-      margin-right: 0!important;
+      width: 30px !important;
+      align-self: flex-end;
+      margin-left: space(1) !important;
+      margin-right: 0 !important;
     }
 
     &--edit {
       &::before {
         background-image: url('../assets/icon-edit.svg');
-      }      
+      }
     }
 
     &--movie {
       &::before {
         background-image: url('../assets/icon-movie.svg');
-      }      
+      }
     }
 
     &--mic {
       &::before {
         background-image: url('../assets/icon-mic.svg');
-      }      
+      }
     }
 
     &--send {
       &::before {
         background-image: url('../assets/icon-send.svg');
-      }      
+      }
     }
   }
 
@@ -103,32 +103,32 @@
   }
 
   &__caption {
-    font-weight: $font-light!important;
+    font-weight: $font-light !important;
     font-size: 0.85rem;
-    margin-top:5px;
+    margin-top: 5px;
   }
 
   &::before {
     display: block;
     height: 50px;
     width: 50px;
-    margin-right:space(0.5);
-    margin-left:space(0.3);
+    margin-right: space(0.5);
+    margin-left: space(0.3);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     height: 100%;
-    width:100%;
+    width: 100%;
     background-color: $light;
     opacity: 0;
-    transition: opacity .2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
   }
 
   &:hover::after {
@@ -137,22 +137,22 @@
 
   &--google {
     max-width: 300px;
-    display:flex;
+    display: flex;
     text-align: left;
 
-    &::before {      
-      content:"";
-      background-image: url('../assets/google_store-logo.svg');      
+    &::before {
+      content: '';
+      background-image: url('../assets/google_store-logo.svg');
     }
   }
 
   &--apple {
     max-width: 300px;
-    display:flex;
+    display: flex;
     text-align: left;
 
-    &::before { 
-      content:"";    
+    &::before {
+      content: '';
       background-image: url('../assets/apple-logo.svg');
     }
   }
@@ -168,29 +168,27 @@
   }
 }
 
-
-
 @media (max-width: $media-query-mobile-fold) {
-  .btn{
+  .btn {
     min-height: 30px;
     min-width: 100px;
     border-radius: 5px;
-    padding:space(0.2) space(0.3);
+    padding: space(0.2) space(0.3);
     font-weight: $font-bold;
-    font-size: 0.8rem!important;
+    font-size: 0.8rem !important;
 
     strong {
-      font-size: 1.2rem!important;
+      font-size: 1.2rem !important;
     }
 
     &::before {
-      height:30px;
+      height: 30px;
       width: 30px;
     }
 
     &__icon {
       &::before {
-        margin-left:space(0.3)!important;
+        margin-left: space(0.3) !important;
       }
     }
 
@@ -198,13 +196,11 @@
       font-weight: $font-bold;
       font-size: 0.8rem;
     }
-  
+
     &__caption {
-      font-weight: $font-light!important;
+      font-weight: $font-light !important;
       font-size: 0.65rem;
-      margin-top:5px;
+      margin-top: 5px;
     }
   }
 }
-
-

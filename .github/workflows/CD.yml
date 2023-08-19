@@ -2,7 +2,7 @@ name: Deploy / docker images
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   workflow-call:
@@ -19,7 +19,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: "just-a-placeholder-so-we-dont-get-errors"
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
       - name: Adding Known Hosts
         run: ssh-keyscan -p ${{ secrets.SSH_PORT}} -H ${{ secrets.SSH_HOST }} >> /home/runner/.ssh/known_hosts
       - name: connect and pull

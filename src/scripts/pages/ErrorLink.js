@@ -1,4 +1,4 @@
-import Button from '../components/Button'
+import Button from '../components/Button';
 
 const ErrorLink = {
   wrapper: null,
@@ -7,8 +7,8 @@ const ErrorLink = {
    * @returns {HTMLElement}
    */
   render: () => {
-    const $node = document.createElement('main')
-    $node.classList.add('container')
+    const $node = document.createElement('main');
+    $node.classList.add('container');
 
     const content = `
       <div class="container__content" data-testid="error-link">
@@ -20,12 +20,12 @@ const ErrorLink = {
         ${Button.playstore.render()}
         ${Button.appstore.render()}
       </div>
-    `
+    `;
 
-    $node.innerHTML = content
-    ErrorLink.wrapper = $node
-    return $node
-  }
-}
+    $node.innerHTML = content;
+    ErrorLink.wrapper = $node;
+    return $node;
+  },
+};
 
-export default ErrorLink
+export default ErrorLink;

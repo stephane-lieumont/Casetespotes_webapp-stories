@@ -1,42 +1,43 @@
 /* eslint-disable no-unused-vars */
+
 /* eslint-disable no-undef */
+import lottie from 'lottie-web';
 
-import Loader from '../../../scripts/components/Loader'
-import lottie from 'lottie-web'
+import Loader from '../../../scripts/components/Loader';
 
-jest.mock('lottie-web')
+jest.mock('lottie-web');
 
 describe('Given UI Animation', () => {
   describe('When i call loader component', () => {
-    let createLoader
-    let handleRenderLoader
-    let handleDestroyLoader
+    let createLoader;
+    let handleRenderLoader;
+    let handleDestroyLoader;
 
     beforeAll(() => {
-      lottie.loadAnimation.mockReturnValue({})
-      lottie.destroy.mockReturnValue({})
+      lottie.loadAnimation.mockReturnValue({});
+      lottie.destroy.mockReturnValue({});
       lottie.loadAnimation.mockImplementation(() => {
         return {
-          destroy: jest.fn()
-        }
-      })
+          destroy: jest.fn(),
+        };
+      });
 
-      createLoader = jest.spyOn(Loader, 'createLoader')
-      handleRenderLoader = jest.fn(Loader.render)
-      handleDestroyLoader = jest.fn(Loader.destroyLoader)
-    })
+      createLoader = jest.spyOn(Loader, 'createLoader');
+      handleRenderLoader = jest.fn(Loader.render);
+      handleDestroyLoader = jest.fn(Loader.destroyLoader);
+    });
 
     test('Then I can render Loader', () => {
-      handleRenderLoader()
+      handleRenderLoader();
 
-      expect(handleRenderLoader).toBeCalled()
-      expect(createLoader).toHaveBeenCalled()
-    })
+      expect(handleRenderLoader).toBeCalled();
+      expect(createLoader).toHaveBeenCalled();
+    });
 
     test('Then I can destroy Loader', () => {
-      handleDestroyLoader()
+      handleDestroyLoader();
 
-      expect(handleDestroyLoader).toBeCalled()
-    })
-  })
-})
+      expect(handleDestroyLoader).toBeCalled();
+    });
+  });
+});

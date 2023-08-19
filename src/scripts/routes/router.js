@@ -1,13 +1,12 @@
-import Header from '../layout/Header'
-import Alert from '../components/Alert'
-
-import EditTestimony from '../pages/EditTestimony'
-import Error404 from '../pages/Error404'
-import ErrorLink from '../pages/ErrorLink'
-import Home from '../pages/Home'
-import Thanks from '../pages/Thanks'
-import TermsOfUse from '../pages/TermsOfUse'
-import { data } from '../../app'
+import { data } from '../../app';
+import Alert from '../components/Alert';
+import Header from '../layout/Header';
+import EditTestimony from '../pages/EditTestimony';
+import Error404 from '../pages/Error404';
+import ErrorLink from '../pages/ErrorLink';
+import Home from '../pages/Home';
+import TermsOfUse from '../pages/TermsOfUse';
+import Thanks from '../pages/Thanks';
 
 /**
  * Define routes with params
@@ -20,8 +19,8 @@ export const routes = [
     params: {
       headerLogoLow: false,
       headerReturnBtn: false,
-      restrictedAccess: true
-    }
+      restrictedAccess: true,
+    },
   },
   {
     path: '/invitation-incorrecte',
@@ -30,8 +29,8 @@ export const routes = [
     params: {
       headerLogoLow: false,
       headerReturnBtn: false,
-      restrictedAccess: false
-    }
+      restrictedAccess: false,
+    },
   },
   {
     path: '/accueil',
@@ -40,8 +39,8 @@ export const routes = [
     params: {
       headerLogoLow: false,
       headerReturnBtn: false,
-      restrictedAccess: true
-    }
+      restrictedAccess: true,
+    },
   },
   {
     path: '/edition-temoignage',
@@ -50,8 +49,8 @@ export const routes = [
     params: {
       headerLogoLow: true,
       headerReturnBtn: true,
-      restrictedAccess: true
-    }
+      restrictedAccess: true,
+    },
   },
   {
     path: '/temoignage-enregistre',
@@ -60,8 +59,8 @@ export const routes = [
     params: {
       headerLogoLow: false,
       headerReturnBtn: false,
-      restrictedAccess: true
-    }
+      restrictedAccess: true,
+    },
   },
   {
     path: '/conditions-generales',
@@ -70,27 +69,27 @@ export const routes = [
     params: {
       headerLogoLow: false,
       headerReturnBtn: true,
-      restrictedAccess: false
-    }
-  }
-]
+      restrictedAccess: false,
+    },
+  },
+];
 
 /**
  * Redirect to other routes
  */
 export const router = () => {
   // add name and parameters to Object component
-  constructComponents(routes)
+  constructComponents(routes);
 
   // Find the component based on the current path
-  const path = parseLocation()
+  const path = parseLocation();
 
   // Get Component by routes with restricted area
-  const component = selectComponent(path, routes, data)
+  const component = selectComponent(path, routes, data);
 
   // Render the component in the app placeholder
-  renderComponent(component, data)
-}
+  renderComponent(component, data);
+};
 
 /**
  * Get route by pathName
@@ -98,9 +97,9 @@ export const router = () => {
  * @returns {String}
  */
 export const getRoute = (pathName) => {
-  const matchRoute = routes.find(route => route.pathName === pathName)
-  return matchRoute ? '#' + matchRoute.path : undefined
-}
+  const matchRoute = routes.find((route) => route.pathName === pathName);
+  return matchRoute ? '#' + matchRoute.path : undefined;
+};
 
 /**
  * Get Component by Path
@@ -108,22 +107,23 @@ export const getRoute = (pathName) => {
  * @param {Object[]} routes
  * @returns {Object}
  */
-export const getComponentByPath = (path, routes) => routes.find(r => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined
+export const getComponentByPath = (path, routes) =>
+  routes.find((r) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
 
 /**
  * Get path from location
  * @returns {String}
  */
-export const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/'
+export const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/';
 
 /**
  * Apply params of routes
  * @param {Object} params
  */
 const applyParams = (params) => {
-  if (params && params.headerLogoLow !== undefined) Header.logoLow(params.headerLogoLow)
-  params && params.headerReturnBtn ? Header.addBtnReturn() : Header.destroyBtnReturn()
-}
+  if (params && params.headerLogoLow !== undefined) Header.logoLow(params.headerLogoLow);
+  params && params.headerReturnBtn ? Header.addBtnReturn() : Header.destroyBtnReturn();
+};
 
 /**
  * selectComponent by path and data
@@ -133,22 +133,22 @@ const applyParams = (params) => {
  * @returns {Object} return component
  */
 const selectComponent = (path, routes, data) => {
-  const componentObject = getComponentByPath(path, routes)
-  let component
+  const componentObject = getComponentByPath(path, routes);
+  let component;
 
   if (componentObject === undefined) {
-    component = Error404
+    component = Error404;
   } else if (!data && componentObject.params.restrictedAccess) {
-    component = ErrorLink
+    component = ErrorLink;
   } else {
-    component = componentObject.component
+    component = componentObject.component;
   }
 
   // apply params routes
-  applyParams(component.params)
+  applyParams(component.params);
 
-  return component
-}
+  return component;
+};
 
 /**
  * Render component on main section DOM
@@ -156,29 +156,31 @@ const selectComponent = (path, routes, data) => {
  * @param {Object} data
  */
 const renderComponent = (component, data) => {
-  const oldHeigthContainer = document.querySelector('#app main').clientHeight
-  document.querySelector('#app').replaceChild(component.render(data), document.querySelector('#app main'))
+  const oldHeigthContainer = document.querySelector('#app main').clientHeight;
+  document
+    .querySelector('#app')
+    .replaceChild(component.render(data), document.querySelector('#app main'));
 
   // Transition heigth main component
-  const newHeigthContainer = document.querySelector('#app main').clientHeight
+  const newHeigthContainer = document.querySelector('#app main').clientHeight;
 
   // Destroy alert forms
-  Alert.destroyAlert()
+  Alert.destroyAlert();
 
-  document.querySelector('#app main').style.height = oldHeigthContainer + 'px'
+  document.querySelector('#app main').style.height = oldHeigthContainer + 'px';
   setTimeout(() => {
-    document.querySelector('#app main').style.height = newHeigthContainer + 'px'
-  }, 50)
-}
+    document.querySelector('#app main').style.height = newHeigthContainer + 'px';
+  }, 50);
+};
 
 /**
  * Add components params defines on routes ArrayObject
  * @param {Object[]} routes
  */
 const constructComponents = (routes) => {
-  routes.forEach(route => {
-    route.component.name = route.pathName
-    route.component.params = route.params
-    route.component.path = route.path
-  })
-}
+  routes.forEach((route) => {
+    route.component.name = route.pathName;
+    route.component.params = route.params;
+    route.component.path = route.path;
+  });
+};

@@ -1,22 +1,22 @@
 .form-control {
   text-align: left;
-  position:relative;
+  position: relative;
   width: 100%;
   max-width: $container-medium;
   margin-bottom: space(1);
 
   button {
-    width: auto!important;
+    width: auto !important;
   }
 
   &__input {
-    position:relative;
-    margin:space(0.5) 0; 
+    position: relative;
+    margin: space(0.5) 0;
 
     label {
       position: absolute;
-      top:space(0.25);
-      left:space(0.5);
+      top: space(0.25);
+      left: space(0.5);
       pointer-events: none;
       padding: 0 5px;
       background-color: white;
@@ -24,37 +24,41 @@
       color: lighten($secondary, 40%);
     }
 
-    input, textarea {
+    input,
+    textarea {
       font-family: 'Roboto', sans-serif;
-      padding:space(0.5);
+      padding: space(0.5);
       font-size: 1rem;
       border-radius: 5px;
       border: 2px solid $light;
       color: lighten($secondary, 20%);
     }
 
-    input:not([value=""]), textarea:not([data-value=""]) {
+    input:not([value='']),
+    textarea:not([data-value='']) {
       + label {
-        transform: translate(-15px, -17px) scale(0.8)
-      }      
-    }
-
-    input:focus-visible, textarea:focus-visible {
-      outline: none;
-      border:2px solid $bluelight;
-
-      + label {
-        color: $blue;
-        transform: translate(-15px, -17px) scale(0.8)
+        transform: translate(-15px, -17px) scale(0.8);
       }
     }
 
-    &.error input, &.error textarea {
-      border:2px solid darken($yellow, 10%);
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: none;
+      border: 2px solid $bluelight;
 
       + label {
-        color: darken($yellow, 10%)
-      } 
+        color: $blue;
+        transform: translate(-15px, -17px) scale(0.8);
+      }
+    }
+
+    &.error input,
+    &.error textarea {
+      border: 2px solid darken($yellow, 10%);
+
+      + label {
+        color: darken($yellow, 10%);
+      }
     }
 
     input {
@@ -62,7 +66,7 @@
       max-width: 300px;
       width: 100%;
 
-      input{
+      input {
         width: 100%;
       }
     }
@@ -74,9 +78,9 @@
   }
 
   &__char {
-    position:absolute;
-    bottom:15px;
-    right:15px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
     color: lighten($secondary, 40%);
     font-size: 0.7rem;
     font-style: italic;

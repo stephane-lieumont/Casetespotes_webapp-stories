@@ -3,7 +3,7 @@
   pointer-events: none;
   top: 0;
   right: 0;
-  color: white;  
+  color: white;
   z-index: 999;
   font-weight: 700;
   text-transform: uppercase;
@@ -13,7 +13,7 @@
 
   &__container {
     pointer-events: none;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     padding: 10px 100px;
     transform: rotate(45deg);
     p {

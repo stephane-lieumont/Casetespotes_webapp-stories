@@ -1,7 +1,7 @@
 .alert {
   position: fixed;
-  top:0;
-  left:50%;
+  top: 0;
+  left: 50%;
   font-size: 0.9rem;
   padding: space(0.3) space(1.6);
   background: $yellow;
@@ -9,28 +9,28 @@
   font-weight: 400;
   border-radius: 20px;
   opacity: 0;
-  animation: show-alert .15s ease-in-out forwards;
+  animation: show-alert 0.15s ease-in-out forwards;
   text-align: center;
   backdrop-filter: blur(20px);
   z-index: 999;
 
   p {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     white-space: nowrap;
   }
 
   &.hide {
     opacity: 1;
     transform: translate(-50%, -50%);
-    animation: hide-alert .15s ease-in-out forwards!important;
+    animation: hide-alert 0.15s ease-in-out forwards !important;
   }
 
   &::before {
     position: absolute;
-    top:0;
+    top: 0;
     left: space(0.5);
-    content:"";
+    content: '';
     height: 100%;
     width: 25px;
     background: url('../assets/error.svg') center no-repeat;
@@ -61,10 +61,8 @@
   }
 }
 
-
 @media (max-width: $media-query-mobile) {
   .alert {
     font-size: 0.72rem;
   }
 }
-

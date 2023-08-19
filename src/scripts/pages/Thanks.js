@@ -1,5 +1,5 @@
-import Button from '../components/Button'
-import { router, routes, parseLocation, getRoute, getComponentByPath } from '../routes/router'
+import Button from '../components/Button';
+import { router, routes, parseLocation, getRoute, getComponentByPath } from '../routes/router';
 
 const Thanks = {
   wrapper: null,
@@ -8,8 +8,8 @@ const Thanks = {
    * @returns {HTMLElement}
    */
   render: () => {
-    const $node = document.createElement('main')
-    $node.classList.add('container')
+    const $node = document.createElement('main');
+    $node.classList.add('container');
 
     const content = `      
       <div class="container__content" data-testid="thanks">
@@ -20,19 +20,19 @@ const Thanks = {
         ${Button.playstore.render()}
         ${Button.appstore.render()}
       </div>
-    `
+    `;
 
-    $node.innerHTML = content
-    Thanks.eventListeners()
-    Thanks.wrapper = $node
-    return $node
+    $node.innerHTML = content;
+    Thanks.eventListeners();
+    Thanks.wrapper = $node;
+    return $node;
   },
 
   /**
    * EventListeners on component
    */
   eventListeners: () => {
-    window.addEventListener('hashchange', Thanks.redirectToRoute)
+    window.addEventListener('hashchange', Thanks.redirectToRoute);
   },
 
   /**
@@ -40,10 +40,10 @@ const Thanks = {
    * @param {HashChangeEvent} e
    */
   redirectToRoute: (e) => {
-    const path = parseLocation()
-    const component = getComponentByPath(path, routes)
-    component.params.restrictedAccess ? location.href = getRoute('error') : router()
-  }
-}
+    const path = parseLocation();
+    const component = getComponentByPath(path, routes);
+    component.params.restrictedAccess ? (location.href = getRoute('error')) : router();
+  },
+};
 
-export default Thanks
+export default Thanks;

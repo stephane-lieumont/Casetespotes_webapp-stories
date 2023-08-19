@@ -1,4 +1,4 @@
-import lottie from 'lottie-web'
+import lottie from 'lottie-web';
 
 const Popup = {
   name: 'popup',
@@ -13,8 +13,8 @@ const Popup = {
    * @returns {HTMLElement}
    */
   render: () => {
-    const $node = document.createElement('div')
-    $node.classList.add('overlay')
+    const $node = document.createElement('div');
+    $node.classList.add('overlay');
 
     const content = `
       <div class="popup" data-testid="popup">
@@ -26,24 +26,24 @@ const Popup = {
           ${Popup.buttonsRender()}
         </div>        
       </div>
-    `
+    `;
 
-    $node.innerHTML = content
+    $node.innerHTML = content;
 
     if (Popup.animation) {
-      const $wrapperAnimation = document.createElement('div')
-      $wrapperAnimation.classList.add('popup__header__animation')
-      $node.querySelector('.popup__header').prepend($wrapperAnimation)
+      const $wrapperAnimation = document.createElement('div');
+      $wrapperAnimation.classList.add('popup__header__animation');
+      $node.querySelector('.popup__header').prepend($wrapperAnimation);
 
       Object.defineProperty(Popup, 'lottieObject', {
         value: Popup.createAnimation($wrapperAnimation),
-        writable: false
-      })
+        writable: false,
+      });
     }
 
-    Popup.wrapper = $node
+    Popup.wrapper = $node;
 
-    return $node
+    return $node;
   },
 
   /**
@@ -52,13 +52,13 @@ const Popup = {
    */
   buttonsRender: () => {
     if (Popup.buttons.length > 0) {
-      let wrapper = '<div class="popup__action">'
-      Popup.buttons.forEach(item => {
-        wrapper += item
-      })
-      wrapper += '</div>'
+      let wrapper = '<div class="popup__action">';
+      Popup.buttons.forEach((item) => {
+        wrapper += item;
+      });
+      wrapper += '</div>';
 
-      return wrapper
+      return wrapper;
     }
   },
 
@@ -74,23 +74,23 @@ const Popup = {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: Popup.animation
-    })
+      path: Popup.animation,
+    });
   },
 
   /**
    * Delete Popup
    */
   destroyPopup: () => {
-    Popup.wrapper.querySelector('.popup').classList.add('hide')
-    Popup.wrapper.classList.add('hide')
+    Popup.wrapper.querySelector('.popup').classList.add('hide');
+    Popup.wrapper.classList.add('hide');
     const timer = setTimeout(() => {
-      Popup.lottieObject.destroy()
-      Popup.wrapper.remove()
-      Popup.wrapper = null
-      clearTimeout(timer)
-    }, 500)
-  }
-}
+      Popup.lottieObject.destroy();
+      Popup.wrapper.remove();
+      Popup.wrapper = null;
+      clearTimeout(timer);
+    }, 500);
+  },
+};
 
-export default Popup
+export default Popup;

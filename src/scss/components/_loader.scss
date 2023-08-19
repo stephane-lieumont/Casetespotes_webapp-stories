@@ -1,13 +1,12 @@
 .animation-loader {
   position: absolute;
-  top:50vh;
-  left:50%;
-  height:100px;
+  top: 50vh;
+  left: 50%;
+  height: 100px;
   width: 200px;
   opacity: 0;
   transform: translate(-50%, -50%);
-  animation: loader-fadein .3s ease-in-out .6s both;
-  
+  animation: loader-fadein 0.3s ease-in-out 0.6s both;
 
   &__lottie {
     position: absolute;
