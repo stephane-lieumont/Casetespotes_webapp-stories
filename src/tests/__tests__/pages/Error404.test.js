@@ -2,7 +2,6 @@
 
 /* eslint-disable no-undef */
 import { screen } from '@testing-library/dom';
-
 import Error404 from '../../../scripts/pages/Error404';
 
 describe('Given call UI Error404 page', () => {

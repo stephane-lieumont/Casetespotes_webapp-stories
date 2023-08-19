@@ -1,5 +1,4 @@
 import lottie from 'lottie-web';
-
 import loaderAnimation from '../../assets/lottie/lottieLoader.json';
 
 const Loader = {

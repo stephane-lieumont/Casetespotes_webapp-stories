@@ -3,7 +3,6 @@
 /* eslint-disable no-undef */
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-
 import Footer from '../../../scripts/layout/Footer';
 import Header from '../../../scripts/layout/Header';
 import Thanks from '../../../scripts/pages/Thanks';

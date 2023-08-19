@@ -1,15 +1,12 @@
-/* eslint-disable no-unused-vars */
-
 /* eslint-disable no-undef */
-import fetchMock from 'jest-fetch-mock';
-
-import Api from '../../scripts/api/Api.class';
 import * as mockConfig from '../__config__/app.config.mock';
 import * as mockStory from '../__mocks__/story.mock.json';
 import * as mockStoryForm from '../__mocks__/storyForm.mock.json';
+import fetchMock from 'jest-fetch-mock';
+import Api from '../../scripts/api/Api.class';
 
-fetchMock.enableMocks();
 jest.mock('../../scripts/app.conf.js', () => mockConfig);
+fetchMock.enableMocks();
 
 describe('Given fetch data from API', () => {
   let handleRequestGet;

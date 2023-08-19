@@ -2,7 +2,6 @@
 
 /* eslint-disable no-undef */
 import lottie from 'lottie-web';
-
 import Loader from '../../../scripts/components/Loader';
 
 jest.mock('lottie-web');

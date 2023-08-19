@@ -2,7 +2,6 @@
 
 /* eslint-disable no-undef */
 import { screen } from '@testing-library/dom';
-
 import TermsOfUse from '../../../scripts/pages/TermsOfUse';
 
 describe('Given call UI TermsOfUse page', () => {

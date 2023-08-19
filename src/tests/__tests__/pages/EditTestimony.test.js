@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import { fireEvent, screen, waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-
 import Header from '../../../scripts/layout/Header';
 import EditTestimony from '../../../scripts/pages/EditTestimony';
 import * as mockStory from '../../__mocks__/story.mock.json';
@@ -45,10 +44,9 @@ describe('Given call UI Edit Testimony page on html document', () => {
   let inputEmail;
   let inputStory;
   let handleInputStory;
+  let handleInputEmail;
   let handleInputStoryMaxLenght;
-
   beforeAll(() => {
-    spySendHideAlert = jest.spyOn(EditTestimony, 'hideAlert');
     spyValidateForm = jest.spyOn(EditTestimony, 'validateForm');
 
     document.body.innerHTML = '';
@@ -63,7 +61,6 @@ describe('Given call UI Edit Testimony page on html document', () => {
     handleInputEmail = jest.fn(EditTestimony.changeInputEmail);
     handleInputStory = jest.fn(EditTestimony.changeInputStory);
     handleInputStoryMaxLenght = jest.fn(EditTestimony.stopEditable);
-    handleDestroyPopup = jest.fn(EditTestimony.destroyPopup);
 
     submitButton.addEventListener('click', handleSendForm);
     inputEmail.addEventListener('change', handleInputEmail);

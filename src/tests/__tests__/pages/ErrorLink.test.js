@@ -2,7 +2,6 @@
 
 /* eslint-disable no-undef */
 import { screen } from '@testing-library/dom';
-
 import ErrorLink from '../../../scripts/pages/ErrorLink';
 
 describe('Given call UI ErrorLink page', () => {

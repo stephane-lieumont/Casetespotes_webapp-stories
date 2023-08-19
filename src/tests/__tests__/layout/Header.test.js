@@ -2,7 +2,6 @@
 
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
-
 import Header from '../../../scripts/layout/Header';
 
 jest.useFakeTimers();

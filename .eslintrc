@@ -16,6 +16,7 @@
   "rules": {
     "comma-dangle": "off",
     "semi": 0,
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "sort-imports": "off"
   }
 }
