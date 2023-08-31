@@ -20,15 +20,11 @@ ENV DEMO ${DEMO}
 ARG PUBLIC_URL
 ENV PUBLIC_URL ${PUBLIC_URL}
 
-RUN if [ "$DEMO" = "true" ] ; then mv /nginx/nginx.demo.conf /nginx/nginx.conf; fi
-
 RUN yarn prod
 
 FROM nginx:1.22.0-alpine as run
 
-RUN rm /etc/nginx/conf.d/default.conf
-
-COPY --from=builder /nginx/nginx.conf /etc/nginx/conf.d
+COPY --from=builder /nginx/nginx.conf /etc/nginx/templates/default.conf.template
 COPY --from=builder /public /usr/share/nginx/html
 
 EXPOSE 80
